@@ -95,6 +95,7 @@ int main(void)
   MX_USART1_UART_Init();
   MX_TIM2_Init();
   MX_FSMC_Init();
+  MX_TIM6_Init();
   /* USER CODE BEGIN 2 */
   LL_GPIO_SetOutputPin(LED0_GPIO_Port, LED0_Pin);
   LL_GPIO_ResetOutputPin(LED1_GPIO_Port, LED1_Pin);

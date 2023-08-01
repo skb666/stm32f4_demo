@@ -229,7 +229,6 @@ void SysTick_Handler(void)
 void TIM2_IRQHandler(void)
 {
   /* USER CODE BEGIN TIM2_IRQn 0 */
-  static int16_t count = 0;
   static KEY key[] = {
     [0] = {
       .status = KS_RELEASE,
@@ -252,14 +251,7 @@ void TIM2_IRQHandler(void)
   /* USER CODE END TIM2_IRQn 0 */
   /* USER CODE BEGIN TIM2_IRQn 1 */
   if(LL_TIM_IsActiveFlag_UPDATE(TIM2)) {
-    if (count == 0) {
-      ev.type = EV_TIM;
-      ev.sub_type = 500;
-      ev.id = 3;
-      event_put(&ev);
-    }
-    count = (count + 1) % 20;
-    for (uint8_t i = 0; i < key_num; ++i) { 
+    for (uint8_t i = 0; i < key_num; ++i) {
       ev.sub_type = key_status_check(&key[i], 20);
       if (ev.sub_type != KE_NONE) {
         ev.type = EV_KEY;
@@ -267,9 +259,33 @@ void TIM2_IRQHandler(void)
         event_put(&ev);
       }
     }
+    LL_TIM_ClearFlag_UPDATE(TIM2);
   }
-  LL_TIM_ClearFlag_UPDATE(TIM2);
   /* USER CODE END TIM2_IRQn 1 */
+}
+
+/**
+  * @brief This function handles TIM6 global interrupt, DAC1 and DAC2 underrun error interrupts.
+  */
+void TIM6_DAC_IRQHandler(void)
+{
+  /* USER CODE BEGIN TIM6_DAC_IRQn 0 */
+  static int16_t count = 0;
+  EVENT ev;
+  /* USER CODE END TIM6_DAC_IRQn 0 */
+
+  /* USER CODE BEGIN TIM6_DAC_IRQn 1 */
+  if(LL_TIM_IsActiveFlag_UPDATE(TIM6)) {
+    if (count == 0) {
+      ev.type = EV_TIM;
+      ev.sub_type = 500;
+      ev.id = 3;
+      event_put(&ev);
+    }
+    count = (count + 1) % 500;
+    LL_TIM_ClearFlag_UPDATE(TIM6);
+  }
+  /* USER CODE END TIM6_DAC_IRQn 1 */
 }
 
 /* USER CODE BEGIN 1 */
