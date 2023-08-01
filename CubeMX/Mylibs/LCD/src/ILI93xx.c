@@ -1,8 +1,9 @@
 #include "ILI93xx.h"
-#include "font.h"
-#include "usart.h"
+
 #include <stdint.h>
 #include <stdio.h>
+
+#include "font.h"
 
 SRAM_HandleTypeDef TFTSRAM_Handler;  // SRAM句柄(用于控制LCD)
 

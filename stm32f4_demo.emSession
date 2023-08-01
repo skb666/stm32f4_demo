@@ -57,12 +57,7 @@
   <Watches active="0" update="Never"/>
  </Watch4>
  <Files>
-  <SessionOpenFile windowGroup="DockEditLeft" x="0" y="69" useTextEdit="1" path="CubeMX/Core/Src/main.c" left="0" top="50" codecName="UTF-8"/>
-  <SessionOpenFile windowGroup="DockEditLeft" x="0" y="22" useTextEdit="1" path="CubeMX/Core/Src/events.c" left="0" top="0" codecName="UTF-8"/>
-  <SessionOpenFile windowGroup="DockEditLeft" x="0" y="0" useTextEdit="1" path="CubeMX/Mylibs/KEY/src/key.c" left="0" top="0" codecName="UTF-8"/>
-  <SessionOpenFile windowGroup="DockEditLeft" x="18" y="3" useTextEdit="1" path="CubeMX/Core/Inc/events.h" left="0" top="0" codecName="UTF-8"/>
-  <SessionOpenFile windowGroup="DockEditLeft" x="27" y="51" useTextEdit="1" path="CubeMX/Mylibs/RING_FIFO/src/ring_fifo.c" left="0" top="27" codecName="UTF-8"/>
-  <SessionOpenFile windowGroup="DockEditLeft" x="7" y="269" useTextEdit="1" path="CubeMX/Core/Src/stm32f4xx_it.c" left="0" selected="1" top="279" codecName="UTF-8"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="14" y="28" useTextEdit="1" path="CubeMX/Core/Src/main.c" left="0" selected="1" top="81" codecName="UTF-8"/>
  </Files>
- <EMStudioWindow activeProject="stm32f4_demo" fileDialogDefaultFilter="*.c" autoConnectTarget="J-Link" buildConfiguration="Debug" sessionSettings="" debugSearchFileMap="" fileDialogInitialDirectory="/home/skb/Desktop/mcu/stm32f4_demo/CubeMX/Core/Src" debugSearchPath="" autoConnectCapabilities="3711"/>
+ <EMStudioWindow activeProject="stm32f4_demo" fileDialogDefaultFilter="*.c" autoConnectTarget="J-Link" buildConfiguration="Debug" sessionSettings="" debugSearchFileMap="" fileDialogInitialDirectory="D:/work/stm32f4_demo/CubeMX/Mylibs/EEPROM/src" debugSearchPath="" autoConnectCapabilities="3711"/>
 </session>

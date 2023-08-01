@@ -18,6 +18,7 @@
 /* USER CODE END Header */
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
+#include "spi.h"
 #include "tim.h"
 #include "usart.h"
 #include "gpio.h"
@@ -29,6 +30,7 @@
 #include <stdint.h>
 #include "events.h"
 #include "ILI93xx.h"
+#include "w25qxx.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -96,9 +98,12 @@ int main(void)
   MX_TIM2_Init();
   MX_FSMC_Init();
   MX_TIM6_Init();
+  MX_TIM12_Init();
+  MX_SPI1_Init();
   /* USER CODE BEGIN 2 */
   LL_GPIO_SetOutputPin(LED0_GPIO_Port, LED0_Pin);
   LL_GPIO_ResetOutputPin(LED1_GPIO_Port, LED1_Pin);
+  W25QXX_Init();
   TFTLCD_Init();
   LCD_Clear(GREEN);
   LCD_ShowString(30, 30, 88, 16, 16, (uint8_t *)"hello world");

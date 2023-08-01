@@ -41,6 +41,7 @@ void tim_event_proc(EVENT *ev) {
 }
 
 void key_event_proc(EVENT *ev) {
+  static uint8_t flag = 0; 
   switch (ev->sub_type) {
     case KE_PRESS: {
       printf("[%hhu]: PRESS\n", ev->id);
@@ -51,7 +52,8 @@ void key_event_proc(EVENT *ev) {
     case KE_LONG_PRESS: {
       printf("[%hhu]: LONG_PRESS\n", ev->id);
       if (ev->id == 0) {
-        LL_GPIO_TogglePin(LCD_BL_GPIO_Port, LCD_BL_Pin);
+        LL_TIM_OC_SetCompareCH2(TIM12, 500 * flag);
+        flag = !flag;
       }
     } break;
     case KE_LONG_RELEASE: {

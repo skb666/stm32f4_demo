@@ -1,7 +1,9 @@
 #ifndef __LCD_H__
 #define __LCD_H__
-#include "main.h"
+
 #include <stdint.h>
+
+#include "main.h"
 
 extern SRAM_HandleTypeDef TFTSRAM_Handler;  // SRAM句柄(用于控制LCD)
 
