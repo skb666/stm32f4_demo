@@ -3,7 +3,13 @@
 #include <stdio.h>
 
 #include "main.h"
+#include "rtc.h"
 #include "ring_fifo.h"
+#include "w25qxx.h"
+
+extern float temperate;
+extern LL_RTC_DateTypeDef curData;
+extern LL_RTC_TimeTypeDef curTime;
 
 static ring_def(EVENT, g_events, 100, 1);
 
@@ -41,13 +47,22 @@ void tim_event_proc(EVENT *ev) {
 }
 
 void key_event_proc(EVENT *ev) {
-  static uint8_t flag = 0; 
+  static uint8_t flag = 0;
+  char str[15];
   switch (ev->sub_type) {
     case KE_PRESS: {
       printf("[%hhu]: PRESS\n", ev->id);
     } break;
     case KE_RELEASE: {
       printf("[%hhu]: RELEASE\n", ev->id);
+      if (ev->id == 0) {
+        RTC_Print(&curData, &curTime);
+      } else if (ev->id == 1) {
+        printf("temp: %.2f\n", temperate);
+      } else if (ev->id == 2) {
+        W25QXX_Read((uint8_t *)str, 0, sizeof(str));
+        printf("eeprom read: %s\n", str);
+      }
     } break;
     case KE_LONG_PRESS: {
       printf("[%hhu]: LONG_PRESS\n", ev->id);
@@ -59,6 +74,7 @@ void key_event_proc(EVENT *ev) {
     case KE_LONG_RELEASE: {
       printf("[%hhu]: LONG_RELEASE\n", ev->id);
     } break;
-    default: break;
+    default:
+      break;
   }
 }

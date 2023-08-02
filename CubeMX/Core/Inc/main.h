@@ -29,6 +29,7 @@ extern "C" {
 /* Includes ------------------------------------------------------------------*/
 #include "stm32f4xx_hal.h"
 
+#include "stm32f4xx_ll_adc.h"
 #include "stm32f4xx_ll_rcc.h"
 #include "stm32f4xx_ll_bus.h"
 #include "stm32f4xx_ll_system.h"
@@ -37,6 +38,7 @@ extern "C" {
 #include "stm32f4xx_ll_utils.h"
 #include "stm32f4xx_ll_pwr.h"
 #include "stm32f4xx_ll_dma.h"
+#include "stm32f4xx_ll_rtc.h"
 #include "stm32f4xx_ll_spi.h"
 #include "stm32f4xx_ll_tim.h"
 #include "stm32f4xx_ll_usart.h"
@@ -74,15 +76,23 @@ void Error_Handler(void);
 #define KEY1_GPIO_Port GPIOE
 #define KEY0_Pin LL_GPIO_PIN_4
 #define KEY0_GPIO_Port GPIOE
+#define T_CS_Pin LL_GPIO_PIN_13
+#define T_CS_GPIO_Port GPIOC
 #define LED0_Pin LL_GPIO_PIN_9
 #define LED0_GPIO_Port GPIOF
 #define LED1_Pin LL_GPIO_PIN_10
 #define LED1_GPIO_Port GPIOF
 #define WK_UP_Pin LL_GPIO_PIN_0
 #define WK_UP_GPIO_Port GPIOA
+#define T_SCK_Pin LL_GPIO_PIN_0
+#define T_SCK_GPIO_Port GPIOB
 #define T_PEN_Pin LL_GPIO_PIN_1
 #define T_PEN_GPIO_Port GPIOB
 #define T_PEN_EXTI_IRQn EXTI1_IRQn
+#define T_MISO_Pin LL_GPIO_PIN_2
+#define T_MISO_GPIO_Port GPIOB
+#define T_MOSI_Pin LL_GPIO_PIN_11
+#define T_MOSI_GPIO_Port GPIOF
 #define F_CS_Pin LL_GPIO_PIN_14
 #define F_CS_GPIO_Port GPIOB
 #define LCD_BL_Pin LL_GPIO_PIN_15

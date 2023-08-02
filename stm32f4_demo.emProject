@@ -33,7 +33,7 @@
       arm_target_device_name="STM32F407ZG"
       arm_target_interface_type="SWD"
       c_preprocessor_definitions="ARM_MATH_CM4;STM32F407xx;__STM32F407_SUBFAMILY;__STM32F4XX_FAMILY;USE_FULL_LL_DRIVER;USE_HAL_DRIVER"
-      c_user_include_directories="$(ProjectDir)/CMSIS_5/CMSIS/Core/Include;$(ProjectDir)/STM32F4xx/Device/Include;$(ProjectDir)/CubeMX/Core/Inc;$(ProjectDir)/CubeMX/Drivers/STM32F4xx_HAL_Driver/Inc;$(ProjectDir)/CubeMX/Drivers/STM32F4xx_HAL_Driver/Inc/Legacy;$(ProjectDir)/CubeMX/Mylibs/KEY/inc;$(ProjectDir)/CubeMX/Mylibs/LCD/inc;$(ProjectDir)/CubeMX/Mylibs/RING_FIFO/inc;$(ProjectDir)/CubeMX/Mylibs/EEPROM/inc"
+      c_user_include_directories="$(ProjectDir)/CMSIS_5/CMSIS/Core/Include;$(ProjectDir)/STM32F4xx/Device/Include;$(ProjectDir)/CubeMX/Core/Inc;$(ProjectDir)/CubeMX/Drivers/STM32F4xx_HAL_Driver/Inc;$(ProjectDir)/CubeMX/Drivers/STM32F4xx_HAL_Driver/Inc/Legacy;$(ProjectDir)/CubeMX/Mylibs/KEY/inc;$(ProjectDir)/CubeMX/Mylibs/LCD/inc;$(ProjectDir)/CubeMX/Mylibs/TOUCH/inc;$(ProjectDir)/CubeMX/Mylibs/RING_FIFO/inc;$(ProjectDir)/CubeMX/Mylibs/EEPROM/inc"
       debug_register_definition_file="$(ProjectDir)/STM32F407_Registers.xml"
       debug_stack_pointer_start="__stack_end__"
       debug_start_from_entry_point_symbol="Yes"
@@ -95,11 +95,13 @@
       <file file_name="CubeMX/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_sram.c" />
       <file file_name="CubeMX/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim.c" />
       <file file_name="CubeMX/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim_ex.c" />
+      <file file_name="CubeMX/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_ll_adc.c" />
       <file file_name="CubeMX/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_ll_dma.c" />
       <file file_name="CubeMX/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_ll_exti.c" />
       <file file_name="CubeMX/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_ll_fsmc.c" />
       <file file_name="CubeMX/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_ll_gpio.c" />
       <file file_name="CubeMX/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_ll_rcc.c" />
+      <file file_name="CubeMX/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_ll_rtc.c" />
       <file file_name="CubeMX/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_ll_spi.c" />
       <file file_name="CubeMX/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_ll_tim.c" />
       <file file_name="CubeMX/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_ll_usart.c" />
@@ -110,6 +112,7 @@
       <file file_name="CubeMX/Mylibs/KEY/src/key.c" />
       <file file_name="CubeMX/Mylibs/RING_FIFO/src/ring_fifo.c" />
       <file file_name="CubeMX/Mylibs/EEPROM/src/w25qxx.c" />
+      <file file_name="CubeMX/Mylibs/TOUCH/src/XPT2046.c" />
     </folder>
     <folder Name="Script Files">
       <file file_name="STM32F4xx/Scripts/STM32F4xx_Target.js">
@@ -118,10 +121,12 @@
     </folder>
     <folder Name="Source Files">
       <configuration Name="Common" filter="c;cpp;cxx;cc;h;s;asm;inc" />
+      <file file_name="CubeMX/Core/Src/adc.c" />
       <file file_name="CubeMX/Core/Src/events.c" />
       <file file_name="CubeMX/Core/Src/fsmc.c" />
       <file file_name="CubeMX/Core/Src/gpio.c" />
       <file file_name="CubeMX/Core/Src/main.c" />
+      <file file_name="CubeMX/Core/Src/rtc.c" />
       <file file_name="CubeMX/Core/Src/spi.c" />
       <file file_name="CubeMX/Core/Src/stm32f4xx_hal_msp.c" />
       <file file_name="CubeMX/Core/Src/stm32f4xx_it.c" />

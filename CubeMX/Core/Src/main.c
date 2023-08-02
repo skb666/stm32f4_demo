@@ -18,6 +18,8 @@
 /* USER CODE END Header */
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
+#include "adc.h"
+#include "rtc.h"
 #include "spi.h"
 #include "tim.h"
 #include "usart.h"
@@ -51,7 +53,9 @@
 /* Private variables ---------------------------------------------------------*/
 
 /* USER CODE BEGIN PV */
-
+float temperate;
+LL_RTC_DateTypeDef curData;
+LL_RTC_TimeTypeDef curTime;
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -62,7 +66,26 @@ void SystemClock_Config(void);
 
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
+void InitRtc(void) {	
+  LL_RTC_DateTypeDef curData;
+  LL_RTC_TimeTypeDef curTime;
+        
+  RTC_Get(&curData, &curTime);
+  RTC_Print(&curData, &curTime);
 
+  curData.Year = 23;
+  curData.Month = 8;
+  curData.Day = 2;	
+  curData.WeekDay = LL_RTC_WEEKDAY_WEDNESDAY;
+
+  curTime.Hours = 14;
+  curTime.Minutes = 0;
+  curTime.Seconds = 0;	
+
+  RTC_Set(&curData, &curTime);
+  RTC_Get(&curData, &curTime);
+  RTC_Print(&curData, &curTime);
+}
 /* USER CODE END 0 */
 
 /**
@@ -100,6 +123,8 @@ int main(void)
   MX_TIM6_Init();
   MX_TIM12_Init();
   MX_SPI1_Init();
+  MX_ADC1_Init();
+  MX_RTC_Init();
   /* USER CODE BEGIN 2 */
   LL_GPIO_SetOutputPin(LED0_GPIO_Port, LED0_Pin);
   LL_GPIO_ResetOutputPin(LED1_GPIO_Port, LED1_Pin);
@@ -113,9 +138,10 @@ int main(void)
   /* USER CODE BEGIN WHILE */
   while (1)
   {
-    if (event_empty()) {
-      ;
-    } else {
+    if (event_empty()) {  // 空闲事件
+      temperate = get_cpu_temperate(5);
+      RTC_Get(&curData, &curTime);
+    } else {  // 处理事件
       while(event_count()) {
         err = event_get(&ev);
         if (err) {
@@ -154,6 +180,14 @@ void SystemClock_Config(void)
 
    /* Wait till HSE is ready */
   while(LL_RCC_HSE_IsReady() != 1)
+  {
+
+  }
+  LL_PWR_EnableBkUpAccess();
+  LL_RCC_LSE_Enable();
+
+   /* Wait till LSE is ready */
+  while(LL_RCC_LSE_IsReady() != 1)
   {
 
   }
