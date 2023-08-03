@@ -66,7 +66,8 @@
   <Watches active="0" update="Never"/>
  </Watch4>
  <Files>
-  <SessionOpenFile windowGroup="DockEditLeft" x="21" y="136" useTextEdit="1" openedFrom="D:/work/stm32f4_demo/CubeMX/Core/Src/events.c" path="CubeMX/Core/Src/main.c" left="0" selected="1" top="132" codecName="UTF-8"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="16" y="127" useTextEdit="1" openedFrom="D:/work/stm32f4_demo/CubeMX/Core/Src/events.c" path="CubeMX/Core/Src/main.c" left="0" selected="1" top="103" codecName="UTF-8"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="7" y="1791" useTextEdit="1" path="CubeMX/Mylibs/LCD/src/ILI93xx.c" left="0" top="1763" codecName="UTF-8"/>
  </Files>
- <EMStudioWindow activeProject="stm32f4_demo" fileDialogDefaultFilter="*.c" autoConnectTarget="J-Link" buildConfiguration="Debug" sessionSettings="" debugSearchFileMap="" fileDialogInitialDirectory="D:/work/stm32f4_demo/CubeMX/Mylibs/TOUCH/src" debugSearchPath="" autoConnectCapabilities="3711"/>
+ <EMStudioWindow activeProject="stm32f4_demo" fileDialogDefaultFilter="*.c" autoConnectTarget="J-Link" buildConfiguration="Debug" sessionSettings="" debugSearchFileMap="" fileDialogInitialDirectory="D:/work/stm32f4_demo/CubeMX/Mylibs/TOUCH/src" debugSearchPath="" autoConnectCapabilities="3199"/>
 </session>

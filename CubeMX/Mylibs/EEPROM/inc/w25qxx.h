@@ -3,6 +3,10 @@
 
 #include <stdint.h>
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 // 25系列FLASH芯片厂商与容量代号（厂商代号EF）
 #define W25Q80 0XEF13
 #define W25Q16 0XEF14
@@ -61,5 +65,9 @@ void W25QXX_Write(uint8_t* pBuffer, uint32_t WriteAddr, uint16_t NumByteToWrite)
 // 擦除flash
 void W25QXX_Erase_Chip(void);                 // 整片擦除
 void W25QXX_Erase_Sector(uint32_t Dst_Addr);  // 扇区擦除
+
+#ifdef __cplusplus
+}
+#endif
 
 #endif /* MYPROJECT_W25Q64_W25QXX_H_ */

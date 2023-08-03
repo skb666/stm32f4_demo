@@ -33,6 +33,7 @@
 #include "events.h"
 #include "ILI93xx.h"
 #include "w25qxx.h"
+#include "XPT2046.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -95,7 +96,7 @@ void InitRtc(void) {
 int main(void)
 {
   /* USER CODE BEGIN 1 */
-  int8_t err = 0;
+  int8_t k, err = 0;
   EVENT ev;
   /* USER CODE END 1 */
 
@@ -112,7 +113,7 @@ int main(void)
   SystemClock_Config();
 
   /* USER CODE BEGIN SysInit */
-
+  
   /* USER CODE END SysInit */
 
   /* Initialize all configured peripherals */
@@ -130,8 +131,28 @@ int main(void)
   LL_GPIO_ResetOutputPin(LED1_GPIO_Port, LED1_Pin);
   W25QXX_Init();
   TFTLCD_Init();
-  LCD_Clear(GREEN);
-  LCD_ShowString(30, 30, 88, 16, 16, (uint8_t *)"hello world");
+  //LCD_Clear(GREEN);
+  //LCD_ShowString(30, 30, 88, 16, 16, (uint8_t *)"hello world");
+
+  Touch_Init();
+
+#if 1
+  W25QXX_Read(&cal_flag, 0, 1);
+  if( cal_flag == 0x55 ) {
+    W25QXX_Read((void*)cal_p, 1, sizeof(cal_p));
+    for (k = 0; k < 6; k++) {
+      printf("\nrx = %llf\n", cal_p[k]);
+    }
+  } else {
+    /* 等待触摸屏校正完成 */
+    while(Touch_Calibrate() != 0);
+  }
+#else
+  while(Touch_Calibrate() != 0);
+#endif
+
+  /* 触摸取色板初始化 */
+  Palette_Init();
   /* USER CODE END 2 */
 
   /* Infinite loop */
@@ -141,6 +162,14 @@ int main(void)
     if (event_empty()) {  // 空闲事件
       temperate = get_cpu_temperate(5);
       RTC_Get(&curData, &curTime);
+
+      if(touch_flag == 1) { /*如果触笔按下*/
+        /*获取点的坐标*/
+        if(Get_touch_point(&display, Read_2046_2(), &touch_param) != 0) {
+          Palette_draw_point(display.x, display.y);
+        }
+      }
+
     } else {  // 处理事件
       while(event_count()) {
         err = event_get(&ev);

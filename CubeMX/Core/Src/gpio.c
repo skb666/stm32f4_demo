@@ -59,7 +59,7 @@ void MX_GPIO_Init(void)
   LL_GPIO_ResetOutputPin(T_CS_GPIO_Port, T_CS_Pin);
 
   /**/
-  LL_GPIO_ResetOutputPin(GPIOB, T_SCK_Pin|T_MISO_Pin);
+  LL_GPIO_ResetOutputPin(T_SCK_GPIO_Port, T_SCK_Pin);
 
   /**/
   LL_GPIO_ResetOutputPin(T_MOSI_GPIO_Port, T_MOSI_Pin);
@@ -108,9 +108,7 @@ void MX_GPIO_Init(void)
 
   /**/
   GPIO_InitStruct.Pin = T_MISO_Pin;
-  GPIO_InitStruct.Mode = LL_GPIO_MODE_OUTPUT;
-  GPIO_InitStruct.Speed = LL_GPIO_SPEED_FREQ_HIGH;
-  GPIO_InitStruct.OutputType = LL_GPIO_OUTPUT_PUSHPULL;
+  GPIO_InitStruct.Mode = LL_GPIO_MODE_INPUT;
   GPIO_InitStruct.Pull = LL_GPIO_PULL_UP;
   LL_GPIO_Init(T_MISO_GPIO_Port, &GPIO_InitStruct);
 
