@@ -1,12 +1,12 @@
 #ifndef __RING_FIFO_H__
 #define __RING_FIFO_H__
 
+#include <stdint.h>
+#include <stdlib.h>
+
 #ifdef __cplusplus
 extern "C" {
 #endif
-
-#include <stdint.h>
-#include <stdlib.h>
 
 typedef struct {
   void *buffer;
@@ -32,6 +32,8 @@ typedef struct {
 
 int8_t ring_push(RING_FIFO *ring, void *element);
 int8_t ring_pop(RING_FIFO *ring, void *element);
+uint16_t ring_push_mult(RING_FIFO *ring, void *elements, uint16_t num);
+uint16_t ring_pop_mult(RING_FIFO *ring, void *elements, uint16_t num);
 void ring_reset(RING_FIFO *ring);
 int8_t ring_is_empty(RING_FIFO *ring);
 int8_t ring_is_full(RING_FIFO *ring);
