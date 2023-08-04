@@ -96,8 +96,8 @@ void InitRtc(void) {
 int main(void)
 {
   /* USER CODE BEGIN 1 */
-  int8_t k, err = 0;
-  EVENT ev;
+  uint16_t ok = 0;
+  POINT display;
   /* USER CODE END 1 */
 
   /* MCU Configuration--------------------------------------------------------*/
@@ -131,60 +131,31 @@ int main(void)
   LL_GPIO_ResetOutputPin(LED1_GPIO_Port, LED1_Pin);
   W25QXX_Init();
   TFTLCD_Init();
-  //LCD_Clear(GREEN);
-  //LCD_ShowString(30, 30, 88, 16, 16, (uint8_t *)"hello world");
-
-  Touch_Init();
-
-#if 1
-  W25QXX_Read(&cal_flag, 0, 1);
-  if( cal_flag == 0x55 ) {
-    W25QXX_Read((void*)cal_p, 1, sizeof(cal_p));
-    for (k = 0; k < 6; k++) {
-      printf("\nrx = %llf\n", cal_p[k]);
-    }
-  } else {
-    /* 等待触摸屏校正完成 */
-    while(Touch_Calibrate() != 0);
-  }
-#else
-  while(Touch_Calibrate() != 0);
-#endif
-
-  /* 触摸取色板初始化 */
-  Palette_Init();
+  Touch_Init(1);
   /* USER CODE END 2 */
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
+  Palette_Init(); // 触摸取色板初始化
   while (1)
   {
-    if (event_empty()) {  // 空闲事件
-      temperate = get_cpu_temperate(5);
-      RTC_Get(&curData, &curTime);
-
-      if(touch_flag == 1) { /*如果触笔按下*/
-        /*获取点的坐标*/
-        if(Get_touch_point(&display, Read_2046_2(), &touch_param) != 0) {
-          Palette_draw_point(display.x, display.y);
-        }
+    /* 轮询处理事件 */
+    if (!event_empty()) {
+      ok = event_poll();
+      if (!ok) {
+        printf("No event was executed\n");
       }
+      continue;
+    }
 
-    } else {  // 处理事件
-      while(event_count()) {
-        err = event_get(&ev);
-        if (err) {
-          printf("get event error!!!\n");
-        }
-        switch (ev.type) {
-          case EV_TIM: {
-            tim_event_proc(&ev);
-          } break;
-          case EV_KEY: {
-            key_event_proc(&ev);
-          } break;
-          default: break;
-        }
+    /* 无事件时执行 */
+    temperate = get_cpu_temperate(5);
+    RTC_Get(&curData, &curTime);
+
+    if (XPT2046_GetFlag()) {
+      /*获取点的坐标*/
+      if(Get_touch_point(&display, Read_2046_2()) != 0) {
+        Palette_draw_point(display.x, display.y);
       }
     }
     /* USER CODE END WHILE */

@@ -18,13 +18,15 @@ typedef enum {
 typedef struct {
   int type;
   int sub_type;
-  int id;
+  void *data;
 } EVENT;
 
 int8_t event_put(EVENT *ev);
 int8_t event_get(EVENT *ev);
 int16_t event_count();
 int8_t event_empty();
+
+uint16_t event_poll();
 
 void tim_event_proc(EVENT *ev);
 void key_event_proc(EVENT *ev);

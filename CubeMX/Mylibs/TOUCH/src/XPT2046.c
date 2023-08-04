@@ -10,9 +10,14 @@
 #define CHY 0xd0     // 通道Y+的选择控制字
 #define THRESHOLD 2  // 差值门限
 
-volatile uint8_t touch_flag;
-uint8_t cal_flag = 0xcc;  // 触摸屏校正标志位
-long double cal_p[6] = {
+typedef struct {
+  // sizeof(long double) = 8
+  long double An, Bn, Cn, Dn, En, Fn, Divider;
+} TOUCH_PARAM;
+
+static volatile uint8_t touch_flag;
+static uint8_t cal_flag = 0xcc;  // 触摸屏校正标志位
+static long double cal_p[6] = {
     0.089694,
     -0.001004,
     -18.180215,
@@ -21,15 +26,14 @@ long double cal_p[6] = {
     -12.706554,
 };  // 触摸屏校正系数
 
-POINT ScreenSample[4];
-POINT DisplaySample[4] = {
+static POINT ScreenSample[4];
+static POINT DisplaySample[4] = {
     {40, 35},
     {20, 200},
     {290, 200},
     {270, 35},
 };
-POINT display;
-TOUCH_PARAM touch_param;  // 用于保存校正系数
+static TOUCH_PARAM touch_param;  // 用于保存校正系数
 
 static inline void TP_CS(uint8_t in) {
   if (in) {
@@ -63,6 +67,14 @@ static inline uint32_t INT_IN_2046() {
   return LL_GPIO_IsInputPinSet(T_PEN_GPIO_Port, T_PEN_Pin);
 }
 
+void XPT2046_SetFlag(uint8_t v) {
+  touch_flag = v;
+}
+
+uint8_t XPT2046_GetFlag() {
+  return touch_flag;
+}
+
 /* us 延时 */
 static void DelayUS(uint32_t cnt) {
   uint16_t i;
@@ -74,8 +86,11 @@ static void DelayUS(uint32_t cnt) {
   }
 }
 
-void Touch_Init(void) {
+void Touch_Init(uint8_t flag) {
+  // 片选使能
   TP_CS(0);
+  // 等待触摸屏校正
+  while(Touch_Calibrate(flag) != 0);
 }
 
 /*
@@ -373,17 +388,28 @@ int8_t Cal_touch_para(POINT *displayPtr, POINT *screenPtr, TOUCH_PARAM *para) {
 /******************************************************
  * 函数名：Touchl_Calibrate
  * 描述  : 触摸屏校正函数
- * 输入  : 无
+ * 输入  : flag 为 1 时从 eeprom 获取参数
  * 输出  : 0   ---   校正成功
  *         1   ---   校正失败
  * 举例  : 无
  * 注意  : 无
  *********************************************************/
-int Touch_Calibrate(void) {
+int Touch_Calibrate(uint8_t flag) {
   uint8_t i, k;
   uint16_t test_x = 0, test_y = 0;
   uint16_t gap_x = 0, gap_y = 0;
   POINT *Ptr;
+
+  if (flag) {
+    W25QXX_Read(&cal_flag, 0, 1);
+    if( cal_flag == 0x55 ) {
+      W25QXX_Read((void*)cal_p, 1, sizeof(cal_p));
+      for (k = 0; k < 6; k++) {
+        printf("rx = %llf\n", cal_p[k]);
+      }
+      return 0;
+    }
+  }
 
   for (i = 0; i < 4; i++) {
     LCD_Clear(BLACK);
@@ -455,7 +481,7 @@ int Touch_Calibrate(void) {
     W25QXX_Write(&cal_flag, 0, 1);
     W25QXX_Write((void *)cal_p, 1, sizeof(cal_p));
     for (k = 0; k < 6; k++) {
-      printf("\ntx = %llf\n", cal_p[k]);
+      printf("tx = %llf\n", cal_p[k]);
     }
   }
 
@@ -476,7 +502,7 @@ int Touch_Calibrate(void) {
  *********************************************************/
 // long double linear=0 ;
 // long double aa1=0,bb1=0,cc1=0,aa2=0,bb2=0,cc2=0;
-int8_t Get_touch_point(POINT *displayPtr, POINT *screenPtr, TOUCH_PARAM *para) {
+int8_t Get_touch_point(POINT *displayPtr, POINT *screenPtr) {
   int8_t retTHRESHOLD = 1;
 
   if (screenPtr == 0) {
@@ -484,7 +510,7 @@ int8_t Get_touch_point(POINT *displayPtr, POINT *screenPtr, TOUCH_PARAM *para) {
     retTHRESHOLD = 0;
   } else {
     // if( para->Divider != 0 )  /* 每次都要校正时 */
-    if (para->Divider != 1) { /* 校正系数写到FLASH时 */
+    if (touch_param.Divider != 1) { /* 校正系数写到FLASH时 */
       // displayPtr->x = ( (aa1 * screenPtr->x) + (bb1 * screenPtr->y) + cc1);
       // displayPtr->y = ((aa2 * screenPtr->x) + (bb2 * screenPtr->y) + cc2 );
       displayPtr->x = ((cal_p[0] * screenPtr->x) + (cal_p[1] * screenPtr->y) + cal_p[2]);
@@ -507,7 +533,7 @@ void Palette_Init(void) {
   LCD_Fill(39, 0, 40, 30, BLACK);
   LCD_Fill(0, 29, 40, 30, BLACK);
   POINT_COLOR = RED;
-  BACK_COLOR = BLACK;
+  BACK_COLOR = WHITE;
   LCD_ShowString(7, 10, 3 * 8, 16, 16, (uint8_t *)"CLR");
 
   LCD_Fill(0, 30, 40, 60, GREEN);

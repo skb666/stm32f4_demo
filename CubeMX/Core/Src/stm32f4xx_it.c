@@ -25,6 +25,7 @@
 #include <stdio.h>
 #include <stdint.h>
 #include "events.h"
+#include "XPT2046.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -44,7 +45,7 @@
 
 /* Private variables ---------------------------------------------------------*/
 /* USER CODE BEGIN PV */
-extern volatile uint8_t touch_flag;
+
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -229,13 +230,13 @@ void SysTick_Handler(void)
 void EXTI1_IRQHandler(void)
 {
   /* USER CODE BEGIN EXTI1_IRQn 0 */
-
+  EVENT ev;
   /* USER CODE END EXTI1_IRQn 0 */
   if (LL_EXTI_IsActiveFlag_0_31(LL_EXTI_LINE_1) != RESET)
   {
     LL_EXTI_ClearFlag_0_31(LL_EXTI_LINE_1);
     /* USER CODE BEGIN LL_EXTI_LINE_1 */
-    touch_flag = 1;
+    XPT2046_SetFlag(1);
     /* USER CODE END LL_EXTI_LINE_1 */
   }
   /* USER CODE BEGIN EXTI1_IRQn 1 */
@@ -249,33 +250,32 @@ void EXTI1_IRQHandler(void)
 void TIM2_IRQHandler(void)
 {
   /* USER CODE BEGIN TIM2_IRQn 0 */
-  static KEY key[] = {
-    [0] = {
+  static KEY key[KEY_NUM] = {
+    [WK_UP] = {
       .status = KS_RELEASE,
       .count = 0,
       .get = get_WK_UP,
     },
-    [1] = {
+    [KEY0] = {
       .status = KS_RELEASE,
       .count = 0,
       .get = get_KEY0,
     },
-    [2] = {
+    [KEY1] = {
       .status = KS_RELEASE,
       .count = 0,
       .get = get_KEY1,
     },
   };
-  const uint8_t key_num = sizeof(key)/sizeof(key[0]);
   EVENT ev;
   /* USER CODE END TIM2_IRQn 0 */
   /* USER CODE BEGIN TIM2_IRQn 1 */
   if(LL_TIM_IsActiveFlag_UPDATE(TIM2)) {
-    for (uint8_t i = 0; i < key_num; ++i) {
+    for (size_t i = 0; i < KEY_NUM; ++i) {
       ev.sub_type = key_status_check(&key[i], 20);
       if (ev.sub_type != KE_NONE) {
         ev.type = EV_KEY;
-        ev.id = i;
+        ev.data = (void *)i;
         event_put(&ev);
       }
     }
@@ -299,7 +299,7 @@ void TIM6_DAC_IRQHandler(void)
     if (count == 0) {
       ev.type = EV_TIM;
       ev.sub_type = 500;
-      ev.id = 3;
+      ev.data = (void *)3;
       event_put(&ev);
     }
     count = (count + 1) % 500;
