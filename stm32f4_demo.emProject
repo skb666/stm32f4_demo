@@ -122,6 +122,8 @@
     <folder Name="Source Files">
       <configuration Name="Common" filter="c;cpp;cxx;cc;h;s;asm;inc" />
       <file file_name="CubeMX/Core/Src/adc.c" />
+      <file file_name="CubeMX/Core/Src/dev.c" />
+      <file file_name="CubeMX/Core/Src/dma.c" />
       <file file_name="CubeMX/Core/Src/events.c" />
       <file file_name="CubeMX/Core/Src/fsmc.c" />
       <file file_name="CubeMX/Core/Src/gpio.c" />

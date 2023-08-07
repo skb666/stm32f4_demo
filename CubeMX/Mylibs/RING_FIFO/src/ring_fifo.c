@@ -5,7 +5,7 @@
 #include <stdlib.h>
 #include <string.h>
 
-int8_t ring_push(RING_FIFO *ring, void *element) {
+int8_t ring_push(RING_FIFO *ring, const void *element) {
   uint8_t *pbuf = NULL;
 
   if (ring == NULL || element == NULL) {
@@ -47,7 +47,7 @@ int8_t ring_pop(RING_FIFO *ring, void *element) {
   return 0;
 }
 
-uint16_t ring_push_mult(RING_FIFO *ring, void *elements, uint16_t num) {
+uint16_t ring_push_mult(RING_FIFO *ring, const void *elements, uint16_t num) {
   uint8_t *inbuf = NULL;
   uint8_t *outbuf = NULL;
   uint16_t cnt = 0, remain = 0;

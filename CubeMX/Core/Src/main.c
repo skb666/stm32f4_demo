@@ -19,6 +19,7 @@
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
 #include "adc.h"
+#include "dma.h"
 #include "rtc.h"
 #include "spi.h"
 #include "tim.h"
@@ -34,6 +35,7 @@
 #include "ILI93xx.h"
 #include "w25qxx.h"
 #include "XPT2046.h"
+#include "dev.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -118,6 +120,7 @@ int main(void)
 
   /* Initialize all configured peripherals */
   MX_GPIO_Init();
+  MX_DMA_Init();
   MX_USART1_UART_Init();
   MX_TIM2_Init();
   MX_FSMC_Init();
@@ -132,13 +135,32 @@ int main(void)
   W25QXX_Init();
   TFTLCD_Init();
   Touch_Init(1);
+
+  Palette_Init(); // 触摸取色板初始化
+
+  POINT_COLOR = BLACK;
+  BACK_COLOR = WHITE;
+  LCD_ShowString(50, 7, 50 * 6, 12, 12, (uint8_t *)"hello world");
+
   /* USER CODE END 2 */
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
-  Palette_Init(); // 触摸取色板初始化
   while (1)
   {
+    uint8_t buf[256];
+    uint16_t size = uart1_read(buf, sizeof(buf));
+    if (size) {
+      uart1_write(buf, size);
+    }
+
+    if (XPT2046_GetFlag()) {
+      /*获取点的坐标*/
+      if(Get_touch_point(&display, Read_2046_2()) != 0) {
+        Palette_draw_point(display.x, display.y);
+      }
+    }
+
     /* 轮询处理事件 */
     if (!event_empty()) {
       ok = event_poll();
@@ -152,12 +174,7 @@ int main(void)
     temperate = get_cpu_temperate(5);
     RTC_Get(&curData, &curTime);
 
-    if (XPT2046_GetFlag()) {
-      /*获取点的坐标*/
-      if(Get_touch_point(&display, Read_2046_2()) != 0) {
-        Palette_draw_point(display.x, display.y);
-      }
-    }
+    uart1_tx_poll();
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */

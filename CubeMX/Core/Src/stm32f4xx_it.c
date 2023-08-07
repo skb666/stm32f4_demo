@@ -26,6 +26,7 @@
 #include <stdint.h>
 #include "events.h"
 #include "XPT2046.h"
+#include "dev.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -230,7 +231,7 @@ void SysTick_Handler(void)
 void EXTI1_IRQHandler(void)
 {
   /* USER CODE BEGIN EXTI1_IRQn 0 */
-  EVENT ev;
+
   /* USER CODE END EXTI1_IRQn 0 */
   if (LL_EXTI_IsActiveFlag_0_31(LL_EXTI_LINE_1) != RESET)
   {
@@ -285,6 +286,22 @@ void TIM2_IRQHandler(void)
 }
 
 /**
+  * @brief This function handles USART1 global interrupt.
+  */
+void USART1_IRQHandler(void)
+{
+  /* USER CODE BEGIN USART1_IRQn 0 */
+
+  /* USER CODE END USART1_IRQn 0 */
+  /* USER CODE BEGIN USART1_IRQn 1 */
+  if (LL_USART_IsActiveFlag_IDLE(USART1)) {
+    LL_USART_ClearFlag_IDLE(USART1);
+    uart1_dmarx_part_done_isr();
+  }
+  /* USER CODE END USART1_IRQn 1 */
+}
+
+/**
   * @brief This function handles TIM6 global interrupt, DAC1 and DAC2 underrun error interrupts.
   */
 void TIM6_DAC_IRQHandler(void)
@@ -306,6 +323,43 @@ void TIM6_DAC_IRQHandler(void)
     LL_TIM_ClearFlag_UPDATE(TIM6);
   }
   /* USER CODE END TIM6_DAC_IRQn 1 */
+}
+
+/**
+  * @brief This function handles DMA2 stream2 global interrupt.
+  */
+void DMA2_Stream2_IRQHandler(void)
+{
+  /* USER CODE BEGIN DMA2_Stream2_IRQn 0 */
+
+  /* USER CODE END DMA2_Stream2_IRQn 0 */
+
+  /* USER CODE BEGIN DMA2_Stream2_IRQn 1 */
+  if (LL_DMA_IsActiveFlag_HT2(DMA2)) {
+    LL_DMA_ClearFlag_HT2(DMA2);
+    uart1_dmarx_part_done_isr();
+  } else if (LL_DMA_IsActiveFlag_TC2(DMA2)) {
+    LL_DMA_ClearFlag_TC2(DMA2);
+    uart1_dmarx_done_isr();
+  }
+  /* USER CODE END DMA2_Stream2_IRQn 1 */
+}
+
+/**
+  * @brief This function handles DMA2 stream7 global interrupt.
+  */
+void DMA2_Stream7_IRQHandler(void)
+{
+  /* USER CODE BEGIN DMA2_Stream7_IRQn 0 */
+
+  /* USER CODE END DMA2_Stream7_IRQn 0 */
+
+  /* USER CODE BEGIN DMA2_Stream7_IRQn 1 */
+  if (LL_DMA_IsActiveFlag_TC7(DMA2)) {
+    LL_DMA_ClearFlag_TC7(DMA2);
+    uart1_dmatx_done_isr();
+  }
+  /* USER CODE END DMA2_Stream7_IRQn 1 */
 }
 
 /* USER CODE BEGIN 1 */

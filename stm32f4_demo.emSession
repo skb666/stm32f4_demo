@@ -28,8 +28,10 @@
  <Project>
   <ProjectSessionItem path="stm32f4_demo"/>
   <ProjectSessionItem path="stm32f4_demo;stm32f4_demo"/>
+  <ProjectSessionItem path="stm32f4_demo;stm32f4_demo;CMSIS Files"/>
   <ProjectSessionItem path="stm32f4_demo;stm32f4_demo;Mylibs"/>
   <ProjectSessionItem path="stm32f4_demo;stm32f4_demo;Source Files"/>
+  <ProjectSessionItem path="stm32f4_demo;stm32f4_demo;System Files"/>
  </Project>
  <Register1>
   <RegisterWindow visibleNodes="CPU - Current Context/r0;CPU - Current Context/r1;CPU - Current Context/r2;CPU - Current Context/r3;CPU - Current Context/r4;CPU - Current Context/r5;CPU - Current Context/r6;CPU - Current Context/r7;CPU - Current Context/r8;CPU - Current Context/r9;CPU - Current Context/r10;CPU - Current Context/r11;CPU - Current Context/r12;CPU - Current Context/sp(r13);CPU - Current Context/lr(r14);CPU - Current Context/pc(r15);CPU - Current Context/apsr;CPU/r0;CPU/r1;CPU/r2;CPU/r3;CPU/r4;CPU/r5;CPU/r6;CPU/r7;CPU/r8;CPU/r9;CPU/r10;CPU/r11;CPU/r12;CPU/sp(r13);CPU/lr(r14);CPU/pc(r15);CPU/xpsr;CPU/MSP;CPU/PSP;CPU/PRIMASK;CPU/BASEPRI;CPU/FAULTMASK;CPU/CONTROL;CPU/internal" binaryNodes="" asciiNodes="" openNodes="CPU - Current Context" name="stm32f4_demo_Debug" decimalNodes="" octalNodes="" unsignedNodes=""/>
@@ -54,7 +56,17 @@
   <Trace enabled="Yes"/>
  </TraceWindow>
  <Watch1>
-  <Watches active="1" update="Never"/>
+  <Watches active="1" update="Never">
+   <Watchpoint expression="__uart1_rx_ring_data" name="__uart1_rx_ring_data" radix="-1" linenumber="22" filename="CubeMX/Core/Src/dev.c"/>
+   <Watchpoint expression="__uart1_tx_ring_data" name="__uart1_tx_ring_data" radix="-1" linenumber="22" filename="CubeMX/Core/Src/dev.c"/>
+   <Watchpoint expression="recv_total_size" name="recv_total_size" radix="-1" linenumber="104" filename="CubeMX/Core/Src/dev.c"/>
+   <Watchpoint expression="size" name="size" radix="10" linenumber="135" filename="CubeMX/Core/Src/dev.c"/>
+   <Watchpoint expression="uart1_dev" name="uart1_dev" radix="-1" linenumber="107" filename="CubeMX/Core/Src/dev.c"/>
+   <Watchpoint expression="uart1_dmarx_buf" name="uart1_dmarx_buf" radix="-1" linenumber="110" filename="CubeMX/Core/Src/dev.c"/>
+   <Watchpoint expression="uart1_dmatx_buf" name="uart1_dmatx_buf" radix="-1" linenumber="135" filename="CubeMX/Core/Src/dev.c"/>
+   <Watchpoint expression="uart1_rx_ring" name="uart1_rx_ring" radix="-1" linenumber="29" filename="CubeMX/Core/Src/dev.c"/>
+   <Watchpoint expression="uart1_tx_ring" name="uart1_tx_ring" radix="-1" linenumber="172" filename="CubeMX/Core/Src/dev.c"/>
+  </Watches>
  </Watch1>
  <Watch2>
   <Watches active="0" update="Never"/>
@@ -66,8 +78,17 @@
   <Watches active="0" update="Never"/>
  </Watch4>
  <Files>
-  <SessionOpenFile windowGroup="DockEditLeft" x="19" y="34" useTextEdit="1" openedFrom="D:/work/stm32f4_demo/CubeMX/Core/Src/events.c" path="CubeMX/Core/Src/main.c" left="0" selected="1" top="26" codecName="UTF-8"/>
-  <SessionOpenFile windowGroup="DockEditLeft" x="56" y="13" useTextEdit="1" path="CubeMX/Core/Src/events.c" left="0" top="0" codecName="UTF-8"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="0" y="98" useTextEdit="1" path="CubeMX/Core/Src/main.c" left="0" selected="1" top="79" codecName="UTF-8"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="34" y="322" useTextEdit="1" path="CubeMX/Core/Src/stm32f4xx_it.c" left="0" top="277" codecName="UTF-8"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="0" y="0" useTextEdit="1" openedFrom="D:/work/stm32f4_demo/CubeMX/Core/Src/usart.c" path="CubeMX/Core/Inc/usart.h" left="0" top="5" codecName="UTF-8"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="10" y="89" useTextEdit="1" path="CubeMX/Core/Src/events.c" left="0" top="61" codecName="UTF-8"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="0" y="74" useTextEdit="1" path="CubeMX/Mylibs/TOUCH/src/XPT2046.c" left="0" top="55" codecName="UTF-8"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="7" y="172" useTextEdit="1" openedFrom="D:/work/stm32f4_demo/CubeMX/Core/Src/dev.c" path="CubeMX/Mylibs/RING_FIFO/src/ring_fifo.c" left="0" top="149" codecName="UTF-8"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="0" y="950" useTextEdit="1" path="CMSIS_5/CMSIS/Core/Include/cmsis_gcc.h" left="0" top="931" codecName="UTF-8"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="0" y="1959" useTextEdit="1" path="CubeMX/Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usart.h" left="0" top="1934" codecName="UTF-8"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="62" y="56" useTextEdit="1" openedFrom="D:/work/stm32f4_demo/CubeMX/Core/Inc/dev.h" path="CubeMX/Core/Src/dev.c" left="0" top="56" codecName="UTF-8"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="0" y="0" useTextEdit="1" path="STM32F4xx/Device/Source/system_stm32f4xx.c" left="0" top="702" codecName="UTF-8"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="18" y="17" useTextEdit="1" openedFrom="D:/work/stm32f4_demo/CubeMX/Core/Src/dev.c" path="CubeMX/Core/Inc/dev.h" left="0" top="0" codecName="UTF-8"/>
  </Files>
- <EMStudioWindow activeProject="stm32f4_demo" fileDialogDefaultFilter="*.c" autoConnectTarget="J-Link" buildConfiguration="Debug" sessionSettings="" debugSearchFileMap="" fileDialogInitialDirectory="D:/work/stm32f4_demo/CubeMX/Mylibs/TOUCH/src" debugSearchPath="" autoConnectCapabilities="3711"/>
+ <EMStudioWindow activeProject="stm32f4_demo" fileDialogDefaultFilter="*.c" autoConnectTarget="J-Link" buildConfiguration="Debug" sessionSettings="" debugSearchFileMap="" fileDialogInitialDirectory="D:/work/stm32f4_demo/CubeMX/Core/Src" debugSearchPath="" autoConnectCapabilities="3711"/>
 </session>

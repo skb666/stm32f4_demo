@@ -30,9 +30,9 @@ typedef struct {
       .size = 0,                             \
   }
 
-int8_t ring_push(RING_FIFO *ring, void *element);
+int8_t ring_push(RING_FIFO *ring, const void *element);
 int8_t ring_pop(RING_FIFO *ring, void *element);
-uint16_t ring_push_mult(RING_FIFO *ring, void *elements, uint16_t num);
+uint16_t ring_push_mult(RING_FIFO *ring, const void *elements, uint16_t num);
 uint16_t ring_pop_mult(RING_FIFO *ring, void *elements, uint16_t num);
 void ring_reset(RING_FIFO *ring);
 int8_t ring_is_empty(RING_FIFO *ring);

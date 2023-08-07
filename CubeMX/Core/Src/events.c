@@ -5,6 +5,7 @@
 #include "main.h"
 #include "ring_fifo.h"
 #include "rtc.h"
+#include "dev.h"
 
 extern float temperate;
 extern LL_RTC_DateTypeDef curData;
@@ -85,6 +86,8 @@ void key_event_proc(EVENT *ev) {
         RTC_Print(&curData, &curTime);
       } else if (id == KEY0) {
         printf("temp: %.2f\n", temperate);
+      } else if (id == KEY1) {
+        print_uart1_tx_rx();
       }
     } break;
     case KE_LONG_PRESS: {

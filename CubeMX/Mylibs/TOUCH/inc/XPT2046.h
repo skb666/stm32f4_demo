@@ -17,6 +17,7 @@ uint8_t XPT2046_GetFlag();
 
 void Touch_Init(uint8_t flag);
 int Touch_Calibrate(uint8_t flag);
+POINT *Read_2046(void);
 POINT *Read_2046_2(void);
 int8_t Get_touch_point(POINT *displayPtr, POINT *screenPtr);
 
