@@ -19,8 +19,8 @@ typedef struct {
 
 static ring_def(uint8_t, uart1_tx_ring, UART1_TX_RING_SIZE, 1);
 static ring_def(uint8_t, uart1_rx_ring, UART1_RX_RING_SIZE, 1);
-static uint8_t uart1_dmatx_buf[UART1_DMATX_BUF_SIZE];
-static uint8_t uart1_dmarx_buf[UART1_DMARX_BUF_SIZE];
+static uint8_t uart1_dmatx_buf[UART1_DMATX_BUF_SIZE] __attribute__((section(".fast.dmatx")));
+static uint8_t uart1_dmarx_buf[UART1_DMARX_BUF_SIZE] __attribute__((section(".fast.dmarx")));
 
 static uart_device_t uart1_dev = {0};
 

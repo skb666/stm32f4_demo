@@ -23,9 +23,9 @@
       arm_endian="Little"
       arm_fp_abi="Hard"
       arm_fpu_type="FPv4-SP-D16"
-      arm_linker_heap_size="1024"
+      arm_linker_heap_size="0"
       arm_linker_process_stack_size="0"
-      arm_linker_stack_size="2048"
+      arm_linker_stack_size="8192"
       arm_linker_variant="SEGGER"
       arm_rtl_variant="SEGGER"
       arm_simulator_memory_simulation_parameter="ROM;0x08000000;0x00100000;RAM;0x10000000;0x00010000;RAM;0x20000000;0x00020000"
@@ -61,6 +61,8 @@
       target_trace_initialize_script="EnableTrace(&quot;$(TraceInterfaceType)&quot;)" />
     <configuration
       Name="Debug"
+      arm_linker_process_stack_size="8192"
+      arm_linker_stack_size="8192"
       gdb_server_allow_memory_access_during_execution="Yes"
       gdb_server_autostart_server="Yes"
       gdb_server_command_line="&quot;$(JLinkDir)/JLinkGDBServerCLExe&quot; -device &quot;$(DeviceName)&quot; -silent"
