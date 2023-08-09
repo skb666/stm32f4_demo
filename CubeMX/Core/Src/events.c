@@ -87,7 +87,7 @@ void key_event_proc(EVENT *ev) {
       } else if (id == KEY0) {
         printf("temp: %.2f\n", temperate);
       } else if (id == KEY1) {
-        print_uart1_tx_rx();
+        print_uart6_tx_rx();
       }
     } break;
     case KE_LONG_PRESS: {

@@ -286,22 +286,6 @@ void TIM2_IRQHandler(void)
 }
 
 /**
-  * @brief This function handles USART1 global interrupt.
-  */
-void USART1_IRQHandler(void)
-{
-  /* USER CODE BEGIN USART1_IRQn 0 */
-
-  /* USER CODE END USART1_IRQn 0 */
-  /* USER CODE BEGIN USART1_IRQn 1 */
-  if (LL_USART_IsActiveFlag_IDLE(USART1)) {
-    LL_USART_ClearFlag_IDLE(USART1);
-    uart1_dmarx_part_done_isr();
-  }
-  /* USER CODE END USART1_IRQn 1 */
-}
-
-/**
   * @brief This function handles TIM6 global interrupt, DAC1 and DAC2 underrun error interrupts.
   */
 void TIM6_DAC_IRQHandler(void)
@@ -326,40 +310,56 @@ void TIM6_DAC_IRQHandler(void)
 }
 
 /**
-  * @brief This function handles DMA2 stream2 global interrupt.
+  * @brief This function handles DMA2 stream1 global interrupt.
   */
-void DMA2_Stream2_IRQHandler(void)
+void DMA2_Stream1_IRQHandler(void)
 {
-  /* USER CODE BEGIN DMA2_Stream2_IRQn 0 */
+  /* USER CODE BEGIN DMA2_Stream1_IRQn 0 */
 
-  /* USER CODE END DMA2_Stream2_IRQn 0 */
+  /* USER CODE END DMA2_Stream1_IRQn 0 */
 
-  /* USER CODE BEGIN DMA2_Stream2_IRQn 1 */
-  if (LL_DMA_IsActiveFlag_HT2(DMA2)) {
-    LL_DMA_ClearFlag_HT2(DMA2);
-    uart1_dmarx_part_done_isr();
-  } else if (LL_DMA_IsActiveFlag_TC2(DMA2)) {
-    LL_DMA_ClearFlag_TC2(DMA2);
-    uart1_dmarx_done_isr();
+  /* USER CODE BEGIN DMA2_Stream1_IRQn 1 */
+  if (LL_DMA_IsActiveFlag_HT1(DMA2)) {
+    LL_DMA_ClearFlag_HT1(DMA2);
+    uart6_dmarx_part_done_isr();
+  } else if (LL_DMA_IsActiveFlag_TC1(DMA2)) {
+    LL_DMA_ClearFlag_TC1(DMA2);
+    uart6_dmarx_done_isr();
   }
-  /* USER CODE END DMA2_Stream2_IRQn 1 */
+  /* USER CODE END DMA2_Stream1_IRQn 1 */
 }
 
 /**
-  * @brief This function handles DMA2 stream7 global interrupt.
+  * @brief This function handles DMA2 stream6 global interrupt.
   */
-void DMA2_Stream7_IRQHandler(void)
+void DMA2_Stream6_IRQHandler(void)
 {
-  /* USER CODE BEGIN DMA2_Stream7_IRQn 0 */
+  /* USER CODE BEGIN DMA2_Stream6_IRQn 0 */
 
-  /* USER CODE END DMA2_Stream7_IRQn 0 */
+  /* USER CODE END DMA2_Stream6_IRQn 0 */
 
-  /* USER CODE BEGIN DMA2_Stream7_IRQn 1 */
-  if (LL_DMA_IsActiveFlag_TC7(DMA2)) {
-    LL_DMA_ClearFlag_TC7(DMA2);
-    uart1_dmatx_done_isr();
+  /* USER CODE BEGIN DMA2_Stream6_IRQn 1 */
+  if (LL_DMA_IsActiveFlag_TC6(DMA2)) {
+    LL_DMA_ClearFlag_TC6(DMA2);
+    uart6_dmatx_done_isr();
   }
-  /* USER CODE END DMA2_Stream7_IRQn 1 */
+  /* USER CODE END DMA2_Stream6_IRQn 1 */
+}
+
+/**
+  * @brief This function handles USART6 global interrupt.
+  */
+void USART6_IRQHandler(void)
+{
+  /* USER CODE BEGIN USART6_IRQn 0 */
+
+  /* USER CODE END USART6_IRQn 0 */
+  /* USER CODE BEGIN USART6_IRQn 1 */
+  if (LL_USART_IsActiveFlag_IDLE(USART6)) {
+    LL_USART_ClearFlag_IDLE(USART6);
+    uart6_dmarx_part_done_isr();
+  }
+  /* USER CODE END USART6_IRQn 1 */
 }
 
 /* USER CODE BEGIN 1 */

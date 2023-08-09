@@ -121,7 +121,6 @@ int main(void)
   /* Initialize all configured peripherals */
   MX_GPIO_Init();
   MX_DMA_Init();
-  MX_USART1_UART_Init();
   MX_TIM2_Init();
   MX_FSMC_Init();
   MX_TIM6_Init();
@@ -129,6 +128,7 @@ int main(void)
   MX_SPI1_Init();
   MX_ADC1_Init();
   MX_RTC_Init();
+  MX_USART6_UART_Init();
   /* USER CODE BEGIN 2 */
   LL_GPIO_SetOutputPin(LED0_GPIO_Port, LED0_Pin);
   LL_GPIO_ResetOutputPin(LED1_GPIO_Port, LED1_Pin);
@@ -149,9 +149,9 @@ int main(void)
   while (1)
   {
     uint8_t buf[256];
-    uint16_t size = uart1_read(buf, sizeof(buf));
+    uint16_t size = uart6_read(buf, sizeof(buf));
     if (size) {
-      uart1_write(buf, size);
+      uart6_write(buf, size);
     }
 
     if (XPT2046_GetFlag()) {
@@ -174,7 +174,7 @@ int main(void)
     temperate = get_cpu_temperate(5);
     RTC_Get(&curData, &curTime);
 
-    uart1_tx_poll();
+    uart6_tx_poll();
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
@@ -208,7 +208,7 @@ void SystemClock_Config(void)
   {
 
   }
-  LL_RCC_PLL_ConfigDomain_SYS(LL_RCC_PLLSOURCE_HSE, LL_RCC_PLLM_DIV_4, 84, LL_RCC_PLLP_DIV_2);
+  LL_RCC_PLL_ConfigDomain_SYS(LL_RCC_PLLSOURCE_HSE, LL_RCC_PLLM_DIV_4, 168, LL_RCC_PLLP_DIV_4);
   LL_RCC_PLL_Enable();
 
    /* Wait till PLL is ready */

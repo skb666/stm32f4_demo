@@ -78,15 +78,15 @@
   <Watches active="0" update="Never"/>
  </Watch4>
  <Files>
-  <SessionOpenFile windowGroup="DockEditLeft" x="0" y="98" useTextEdit="1" path="CubeMX/Core/Src/main.c" left="0" selected="1" top="79" codecName="UTF-8"/>
-  <SessionOpenFile windowGroup="DockEditLeft" x="34" y="322" useTextEdit="1" path="CubeMX/Core/Src/stm32f4xx_it.c" left="0" top="277" codecName="UTF-8"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="0" y="98" useTextEdit="1" path="CubeMX/Core/Src/main.c" left="0" top="60" codecName="UTF-8"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="34" y="322" useTextEdit="1" path="CubeMX/Core/Src/stm32f4xx_it.c" left="0" top="286" codecName="UTF-8"/>
   <SessionOpenFile windowGroup="DockEditLeft" x="0" y="0" useTextEdit="1" openedFrom="D:/work/stm32f4_demo/CubeMX/Core/Src/usart.c" path="CubeMX/Core/Inc/usart.h" left="0" top="5" codecName="UTF-8"/>
   <SessionOpenFile windowGroup="DockEditLeft" x="10" y="89" useTextEdit="1" path="CubeMX/Core/Src/events.c" left="0" top="61" codecName="UTF-8"/>
   <SessionOpenFile windowGroup="DockEditLeft" x="0" y="74" useTextEdit="1" path="CubeMX/Mylibs/TOUCH/src/XPT2046.c" left="0" top="55" codecName="UTF-8"/>
   <SessionOpenFile windowGroup="DockEditLeft" x="7" y="172" useTextEdit="1" openedFrom="D:/work/stm32f4_demo/CubeMX/Core/Src/dev.c" path="CubeMX/Mylibs/RING_FIFO/src/ring_fifo.c" left="0" top="149" codecName="UTF-8"/>
   <SessionOpenFile windowGroup="DockEditLeft" x="0" y="950" useTextEdit="1" path="CMSIS_5/CMSIS/Core/Include/cmsis_gcc.h" left="0" top="931" codecName="UTF-8"/>
   <SessionOpenFile windowGroup="DockEditLeft" x="0" y="1959" useTextEdit="1" path="CubeMX/Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usart.h" left="0" top="1934" codecName="UTF-8"/>
-  <SessionOpenFile windowGroup="DockEditLeft" x="62" y="56" useTextEdit="1" openedFrom="D:/work/stm32f4_demo/CubeMX/Core/Inc/dev.h" path="CubeMX/Core/Src/dev.c" left="0" top="56" codecName="UTF-8"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="62" y="56" useTextEdit="1" openedFrom="D:/work/stm32f4_demo/CubeMX/Core/Inc/dev.h" path="CubeMX/Core/Src/dev.c" left="0" selected="1" top="0" codecName="UTF-8"/>
   <SessionOpenFile windowGroup="DockEditLeft" x="0" y="0" useTextEdit="1" path="STM32F4xx/Device/Source/system_stm32f4xx.c" left="0" top="702" codecName="UTF-8"/>
   <SessionOpenFile windowGroup="DockEditLeft" x="18" y="17" useTextEdit="1" openedFrom="D:/work/stm32f4_demo/CubeMX/Core/Src/dev.c" path="CubeMX/Core/Inc/dev.h" left="0" top="0" codecName="UTF-8"/>
  </Files>
