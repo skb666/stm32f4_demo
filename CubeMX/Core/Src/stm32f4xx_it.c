@@ -23,7 +23,6 @@
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
 #include <stdio.h>
-#include <stdint.h>
 #include "events.h"
 #include "XPT2046.h"
 #include "dev.h"

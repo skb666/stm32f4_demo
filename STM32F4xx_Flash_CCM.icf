@@ -70,8 +70,8 @@ define memory with size = 4G;
 // Combined regions per memory type
 //
 define region FLASH = FLASH1;
-define region INST_RAM = RAM1;
-define region DATA_RAM = CCM_RAM1 + RAM1;
+define region CCM_RAM = CCM_RAM1;
+define region DATA_RAM = RAM1;
 
 //
 // Block definitions
@@ -97,7 +97,7 @@ do not initialize                           { section .no_init, section .no_init
 do not initialize                           { section .noinit, section .noinit.*, section .*.noinit, section .*.noinit.* };       // Legacy sections, used by some SDKs/HALs
 do not initialize                           { block vectors_ram };
 initialize by copy with packing=auto        { section .data, section .data.*, section .*.data, section .*.data.* };               // Static data sections
-initialize by copy with packing=auto        { section .fast, section .fast.*, section .*.fast, section .*.fast.* };               // "RAM Code" sections
+initialize by copy with packing=auto        { section .ccmram, section .ccmram.*, section .*.ccmram, section .*.ccmram.* };       // "RAM Code" sections
 
 #define USES_ALLOC_FUNC                                   \
   linked symbol malloc || linked symbol aligned_alloc ||  \
@@ -121,13 +121,13 @@ place in FLASH1                             { section .FLASH1, section .FLASH1.*
 //
 // FLASH Placement
 //
-place at start of FLASH                     { block vectors };                                      // Vector table section
-place in FLASH with minimum size order      { block tdata_load,                                     // Thread-local-storage load image
-                                              block exidx,                                          // ARM exception unwinding block
-                                              block ctors,                                          // Constructors block
-                                              block dtors,                                          // Destructors block
-                                              readonly,                                             // Catch-all for readonly data (e.g. .rodata, .srodata)
-                                              readexec                                              // Catch-all for (readonly) executable code (e.g. .text)
+place at start of FLASH                     { block vectors };                                     // Vector table section
+place in FLASH with minimum size order      { block tdata_load,                                    // Thread-local-storage load image
+                                              block exidx,                                         // ARM exception unwinding block
+                                              block ctors,                                         // Constructors block
+                                              block dtors,                                         // Destructors block
+                                              readonly,                                            // Catch-all for readonly data (e.g. .rodata, .srodata)
+                                              readexec                                             // Catch-all for (readonly) executable code (e.g. .text)
                                             };
 
 //
@@ -138,11 +138,11 @@ place in RAM1                               { section .RAM1, section .RAM1.* };
 //
 // RAM Placement
 //
-place at start of DATA_RAM                   { block vectors_ram };
-place in INST_RAM                            { section .fast, section .fast.* };                    // "ramfunc" section
-place in DATA_RAM with auto order            { block tls,                                           // Thread-local-storage block
-                                              readwrite,                                            // Catch-all for initialized/uninitialized data sections (e.g. .data, .noinit)
-                                              zeroinit                                              // Catch-all for zero-initialized data sections (e.g. .bss)
+place at start of CCM_RAM                   { block vectors_ram };
+place in CCM_RAM                            { section .ccmram, section .ccmram.* };                // "ramfunc" section
+place in DATA_RAM with auto order           { block tls,                                           // Thread-local-storage block
+                                              readwrite,                                           // Catch-all for initialized/uninitialized data sections (e.g. .data, .noinit)
+                                              zeroinit                                             // Catch-all for zero-initialized data sections (e.g. .bss)
                                             };
-place in DATA_RAM                            { block heap };                                        // Heap reserved block
-place at end of DATA_RAM                     { block stack };                                       // Stack reserved block at the end
+place in DATA_RAM                           { block heap };                                        // Heap reserved block
+place at end of CCM_RAM                     { block stack };                                       // Stack reserved block at the end

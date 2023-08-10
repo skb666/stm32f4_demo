@@ -405,7 +405,7 @@ int Touch_Calibrate(uint8_t flag) {
     if( cal_flag == 0x55 ) {
       W25QXX_Read((void*)cal_p, 1, sizeof(cal_p));
       for (k = 0; k < 6; k++) {
-        printf("rx = %llf\n", cal_p[k]);
+        printf("rx = %Lf\n", cal_p[k]);
       }
       return 0;
     }
@@ -481,7 +481,7 @@ int Touch_Calibrate(uint8_t flag) {
     W25QXX_Write(&cal_flag, 0, 1);
     W25QXX_Write((void *)cal_p, 1, sizeof(cal_p));
     for (k = 0; k < 6; k++) {
-      printf("tx = %llf\n", cal_p[k]);
+      printf("tx = %Lf\n", cal_p[k]);
     }
   }
 

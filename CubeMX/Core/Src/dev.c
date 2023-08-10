@@ -17,10 +17,10 @@ typedef struct {
   uint32_t rx_count;
 } uart_device_t;
 
-static ring_def(uint8_t, uart6_tx_ring, UART6_TX_RING_SIZE, 1);
-static ring_def(uint8_t, uart6_rx_ring, UART6_RX_RING_SIZE, 1);
-static uint8_t uart6_dmatx_buf[UART6_DMATX_BUF_SIZE] __attribute__((section(".fast.dmatx")));
-static uint8_t uart6_dmarx_buf[UART6_DMARX_BUF_SIZE] __attribute__((section(".fast.dmarx")));
+static ring_def(uint8_t _CCM_DATA, uart6_tx_ring, UART6_TX_RING_SIZE, 1);
+static ring_def(uint8_t _CCM_DATA, uart6_rx_ring, UART6_RX_RING_SIZE, 1);
+static uint8_t uart6_dmatx_buf[UART6_DMATX_BUF_SIZE];
+static uint8_t uart6_dmarx_buf[UART6_DMARX_BUF_SIZE];
 
 static uart_device_t uart6_dev = {0};
 
@@ -178,6 +178,6 @@ uint16_t uart6_write(const uint8_t *buf, uint16_t size) {
 }
 
 void print_uart6_tx_rx(void) {
-  printf("uart6_tx: %u\n", uart6_dev.tx_count);
-  printf("uart6_rx: %u\n", uart6_dev.rx_count);
+  printf("uart6_tx: %lu\n", uart6_dev.tx_count);
+  printf("uart6_rx: %lu\n", uart6_dev.rx_count);
 }

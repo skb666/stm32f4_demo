@@ -18,16 +18,16 @@ typedef struct {
   int16_t size;
 } RING_FIFO;
 
-#define ring_def(Type, BufName, Size, Cover) \
-  Type __##BufName##_data[Size];             \
-  RING_FIFO BufName = {                      \
-      .buffer = __##BufName##_data,          \
-      .capacity = Size,                      \
-      .element_size = sizeof(Type),          \
-      .cover = Cover,                        \
-      .head = 0,                             \
-      .tail = 0,                             \
-      .size = 0,                             \
+#define ring_def(Type, BufName, Size, Cover)         \
+  Type __##BufName##_data[Size];                     \
+  RING_FIFO BufName = {                              \
+      .buffer = __##BufName##_data,                  \
+      .capacity = Size,                              \
+      .element_size = sizeof(__##BufName##_data[0]), \
+      .cover = Cover,                                \
+      .head = 0,                                     \
+      .tail = 0,                                     \
+      .size = 0,                                     \
   }
 
 int8_t ring_push(RING_FIFO *ring, const void *element);

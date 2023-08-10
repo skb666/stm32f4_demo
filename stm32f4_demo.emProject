@@ -52,7 +52,7 @@
       link_linker_script_file="$(ProjectDir)/STM32F4xx_Flash_CCM.icf"
       linker_memory_map_file="$(ProjectDir)/STM32F407ZGTx_MemoryMap.xml"
       linker_output_format="hex"
-      linker_printf_fp_enabled="Float"
+      linker_printf_fp_enabled="Double"
       macros="DeviceHeaderFile=$(PackagesDir)/STM32F4xx/Device/Include/stm32f4xx.h;DeviceSystemFile=$(PackagesDir)/STM32F4xx/Device/Source/system_stm32f4xx.c;DeviceVectorsFile=$(PackagesDir)/STM32F4xx/Source/stm32f407xx_Vectors.s;DeviceFamily=STM32F4xx;DeviceSubFamily=STM32F407;Target=STM32F407ZGTx"
       project_directory=""
       project_type="Executable"
@@ -61,8 +61,13 @@
       target_trace_initialize_script="EnableTrace(&quot;$(TraceInterfaceType)&quot;)" />
     <configuration
       Name="Debug"
+      WARNING_LEVEL="2 (Standard)"
       arm_linker_process_stack_size="8192"
       arm_linker_stack_size="8192"
+      c_preprocessor_definitions=""
+      gcc_strict_prototypes_warning="None"
+      gcc_uninitialized_variables_warning="Yes"
+      gcc_unused_variable_warning="Yes"
       gdb_server_allow_memory_access_during_execution="Yes"
       gdb_server_autostart_server="Yes"
       gdb_server_command_line="&quot;$(JLinkDir)/JLinkGDBServerCLExe&quot; -device &quot;$(DeviceName)&quot; -silent"

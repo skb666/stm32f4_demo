@@ -12,7 +12,7 @@ extern LL_RTC_DateTypeDef curData;
 extern LL_RTC_TimeTypeDef curTime;
 
 static const char *key_name[] = {KEY_ENUM(ENUM_STRING)};
-static ring_def(EVENT, g_events, 100, 1);
+static ring_def(EVENT _CCM_DATA, g_events, 100, 1);
 
 int8_t event_put(EVENT *ev) {
   int8_t err = 0;
@@ -74,7 +74,6 @@ void tim_event_proc(EVENT *ev) {
 
 void key_event_proc(EVENT *ev) {
   static uint8_t flag = 0;
-  char str[15];
   size_t id = (size_t)ev->data;
   switch (ev->sub_type) {
     case KE_PRESS: {

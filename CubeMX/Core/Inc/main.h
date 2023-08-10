@@ -46,7 +46,7 @@ extern "C" {
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
-
+#include <stdint.h>
 /* USER CODE END Includes */
 
 /* Exported types ------------------------------------------------------------*/
@@ -110,6 +110,8 @@ void Error_Handler(void);
 typedef enum {
   KEY_ENUM(ENUM_ITEM)
 } KEY_NAME;
+
+#define _CCM_DATA __attribute__((section(".ccmram.data")))
 /* USER CODE END Private defines */
 
 #ifdef __cplusplus

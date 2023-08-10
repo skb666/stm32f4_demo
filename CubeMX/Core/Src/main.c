@@ -30,7 +30,6 @@
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
 #include <stdio.h>
-#include <stdint.h>
 #include "events.h"
 #include "ILI93xx.h"
 #include "w25qxx.h"
@@ -69,26 +68,12 @@ void SystemClock_Config(void);
 
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
-void InitRtc(void) {	
-  LL_RTC_DateTypeDef curData;
-  LL_RTC_TimeTypeDef curTime;
-        
-  RTC_Get(&curData, &curTime);
-  RTC_Print(&curData, &curTime);
-
-  curData.Year = 23;
-  curData.Month = 8;
-  curData.Day = 2;	
-  curData.WeekDay = LL_RTC_WEEKDAY_WEDNESDAY;
-
-  curTime.Hours = 14;
-  curTime.Minutes = 0;
-  curTime.Seconds = 0;	
-
-  RTC_Set(&curData, &curTime);
-  RTC_Get(&curData, &curTime);
-  RTC_Print(&curData, &curTime);
+#ifdef DEBUG
+int fputc(int ch, FILE *f) {
+  ITM_SendChar(ch);
+  return (ch);
 }
+#endif
 /* USER CODE END 0 */
 
 /**
