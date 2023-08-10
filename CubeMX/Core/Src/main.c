@@ -26,6 +26,7 @@
 #include "spi.h"
 #include "tim.h"
 #include "usart.h"
+#include "usb_device.h"
 #include "gpio.h"
 #include "fsmc.h"
 
@@ -118,6 +119,7 @@ int main(void)
   MX_USART6_UART_Init();
   MX_SDIO_SD_Init();
   MX_FATFS_Init();
+  MX_USB_DEVICE_Init();
   /* USER CODE BEGIN 2 */
   LL_GPIO_SetOutputPin(LED0_GPIO_Port, LED0_Pin);
   LL_GPIO_ResetOutputPin(LED1_GPIO_Port, LED1_Pin);
@@ -199,6 +201,7 @@ void SystemClock_Config(void)
 
   }
   LL_RCC_PLL_ConfigDomain_SYS(LL_RCC_PLLSOURCE_HSE, LL_RCC_PLLM_DIV_4, 168, LL_RCC_PLLP_DIV_4);
+  LL_RCC_PLL_ConfigDomain_48M(LL_RCC_PLLSOURCE_HSE, LL_RCC_PLLM_DIV_4, 168, LL_RCC_PLLQ_DIV_7);
   LL_RCC_PLL_Enable();
 
    /* Wait till PLL is ready */
