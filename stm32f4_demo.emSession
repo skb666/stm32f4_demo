@@ -1,7 +1,9 @@
 <!DOCTYPE CrossStudio_Session_File>
 <session>
  <Bookmarks/>
- <Breakpoints groups="Breakpoints" active_group="Breakpoints"/>
+ <Breakpoints groups="Breakpoints" active_group="Breakpoints">
+  <Exceptions set="MemManage;UsageFault_Coprocessor;UsageFault_CheckingError;UsageFault_StateError;BusFault;ExceptionEntryReturnFault;HardFault"/>
+ </Breakpoints>
  <ExecutionProfileWindow/>
  <FrameBuffer>
   <FrameBufferWindow width="0" keepAspectRatio="0" zoomToFitWindow="0" addressSpace="" format="0" height="0" autoEvaluate="0" scaleFactor="1" refreshPeriod="0" name="stm32f4_demo_Debug" addressText="" accessByDisplayWidth="0"/>
@@ -26,10 +28,14 @@
  <Project>
   <ProjectSessionItem path="stm32f4_demo"/>
   <ProjectSessionItem path="stm32f4_demo;stm32f4_demo"/>
-  <ProjectSessionItem path="stm32f4_demo;stm32f4_demo;CMSIS Files"/>
+  <ProjectSessionItem path="stm32f4_demo;stm32f4_demo;Core"/>
+  <ProjectSessionItem path="stm32f4_demo;stm32f4_demo;FatFs"/>
+  <ProjectSessionItem path="stm32f4_demo;stm32f4_demo;FatFs;App"/>
+  <ProjectSessionItem path="stm32f4_demo;stm32f4_demo;FatFs;Target"/>
+  <ProjectSessionItem path="stm32f4_demo;stm32f4_demo;Middlewares"/>
+  <ProjectSessionItem path="stm32f4_demo;stm32f4_demo;Middlewares;FatFs"/>
+  <ProjectSessionItem path="stm32f4_demo;stm32f4_demo;Middlewares;FatFs;option"/>
   <ProjectSessionItem path="stm32f4_demo;stm32f4_demo;Mylibs"/>
-  <ProjectSessionItem path="stm32f4_demo;stm32f4_demo;Source Files"/>
-  <ProjectSessionItem path="stm32f4_demo;stm32f4_demo;System Files"/>
  </Project>
  <Register1>
   <RegisterWindow visibleNodes="CPU - Current Context/r0;CPU - Current Context/r1;CPU - Current Context/r2;CPU - Current Context/r3;CPU - Current Context/r4;CPU - Current Context/r5;CPU - Current Context/r6;CPU - Current Context/r7;CPU - Current Context/r8;CPU - Current Context/r9;CPU - Current Context/r10;CPU - Current Context/r11;CPU - Current Context/r12;CPU - Current Context/sp(r13);CPU - Current Context/lr(r14);CPU - Current Context/pc(r15);CPU - Current Context/apsr;CPU/r0;CPU/r1;CPU/r2;CPU/r3;CPU/r4;CPU/r5;CPU/r6;CPU/r7;CPU/r8;CPU/r9;CPU/r10;CPU/r11;CPU/r12;CPU/sp(r13);CPU/lr(r14);CPU/pc(r15);CPU/xpsr;CPU/MSP;CPU/PSP;CPU/PRIMASK;CPU/BASEPRI;CPU/FAULTMASK;CPU/CONTROL;CPU/internal" binaryNodes="" asciiNodes="" openNodes="CPU - Current Context" name="stm32f4_demo_Debug" decimalNodes="" octalNodes="" unsignedNodes=""/>
@@ -76,13 +82,9 @@
   <Watches active="0" update="Never"/>
  </Watch4>
  <Files>
-  <SessionOpenFile windowGroup="DockEditLeft" x="0" y="98" useTextEdit="1" path="CubeMX/Core/Src/main.c" left="0" top="79" codecName="UTF-8"/>
-  <SessionOpenFile windowGroup="DockEditLeft" x="37" y="33" useTextEdit="1" path="CubeMX/Core/Src/dev.c" left="0" selected="1" top="6" codecName="UTF-8"/>
-  <SessionOpenFile windowGroup="DockEditLeft" x="32" y="102" useTextEdit="1" path="CubeMX/Core/Src/usart.c" left="0" top="76" codecName="UTF-8"/>
-  <SessionOpenFile windowGroup="DockEditLeft" x="12" y="0" useTextEdit="1" path="CubeMX/Mylibs/RING_FIFO/src/ring_fifo.c" left="0" top="0" codecName="UTF-8"/>
-  <SessionOpenFile windowGroup="DockEditLeft" x="0" y="0" useTextEdit="1" path="CubeMX/Core/Src/adc.c" left="0" top="0" codecName="UTF-8"/>
-  <SessionOpenFile windowGroup="DockEditLeft" x="0" y="0" useTextEdit="1" path="CubeMX/Core/Src/events.c" left="0" top="0" codecName="UTF-8"/>
-  <SessionOpenFile windowGroup="DockEditLeft" x="0" y="0" useTextEdit="1" path="CubeMX/Core/Src/dma.c" left="0" top="0" codecName="UTF-8"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="23" y="68" useTextEdit="1" path="CubeMX/Core/Src/main.c" left="0" top="66" codecName="UTF-8"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="0" y="0" useTextEdit="1" path="CubeMX/Core/Src/usart.c" left="0" top="58" codecName="UTF-8"/>
+  <SessionOpenFile windowGroup="DockEditLeft" x="29" y="62" useTextEdit="1" path="CubeMX/Core/Src/dev.c" left="0" selected="1" top="150" codecName="UTF-8"/>
  </Files>
- <EMStudioWindow activeProject="stm32f4_demo" fileDialogDefaultFilter="*.c" autoConnectTarget="J-Link" buildConfiguration="Debug" sessionSettings="" debugSearchFileMap="" fileDialogInitialDirectory="D:/work/stm32f4_demo/CubeMX/Core/Src" debugSearchPath="" autoConnectCapabilities="3199"/>
+ <EMStudioWindow activeProject="stm32f4_demo" fileDialogDefaultFilter="*.c" autoConnectTarget="J-Link" buildConfiguration="Debug" sessionSettings="" debugSearchFileMap="" fileDialogInitialDirectory="D:/work/stm32f4_demo/CubeMX/Middlewares/Third_Party/FatFs/src/option" debugSearchPath="" autoConnectCapabilities="3711"/>
 </session>

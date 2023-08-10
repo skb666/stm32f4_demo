@@ -1,5 +1,6 @@
 <!DOCTYPE CrossStudio_Project_File>
 <solution Name="stm32f4_demo" target="8" version="2">
+  <configuration Name="Common" />
   <configuration
     Name="Debug"
     c_preprocessor_definitions="DEBUG"
@@ -24,8 +25,7 @@
       arm_fp_abi="Hard"
       arm_fpu_type="FPv4-SP-D16"
       arm_linker_heap_size="0"
-      arm_linker_process_stack_size="0"
-      arm_linker_stack_size="8192"
+      arm_linker_stack_size="16384"
       arm_linker_variant="SEGGER"
       arm_rtl_variant="SEGGER"
       arm_simulator_memory_simulation_parameter="ROM;0x08000000;0x00100000;RAM;0x10000000;0x00010000;RAM;0x20000000;0x00020000"
@@ -33,7 +33,7 @@
       arm_target_device_name="STM32F407ZG"
       arm_target_interface_type="SWD"
       c_preprocessor_definitions="ARM_MATH_CM4;STM32F407xx;__STM32F407_SUBFAMILY;__STM32F4XX_FAMILY;USE_FULL_LL_DRIVER;USE_HAL_DRIVER"
-      c_user_include_directories="$(ProjectDir)/CMSIS_5/CMSIS/Core/Include;$(ProjectDir)/STM32F4xx/Device/Include;$(ProjectDir)/CubeMX/Core/Inc;$(ProjectDir)/CubeMX/Drivers/STM32F4xx_HAL_Driver/Inc;$(ProjectDir)/CubeMX/Drivers/STM32F4xx_HAL_Driver/Inc/Legacy;$(ProjectDir)/CubeMX/Mylibs/KEY/inc;$(ProjectDir)/CubeMX/Mylibs/LCD/inc;$(ProjectDir)/CubeMX/Mylibs/TOUCH/inc;$(ProjectDir)/CubeMX/Mylibs/RING_FIFO/inc;$(ProjectDir)/CubeMX/Mylibs/EEPROM/inc"
+      c_user_include_directories="$(ProjectDir)/CMSIS_5/CMSIS/Core/Include;$(ProjectDir)/STM32F4xx/Device/Include;$(ProjectDir)/CubeMX/Core/Inc;$(ProjectDir)/CubeMX/Drivers/STM32F4xx_HAL_Driver/Inc;$(ProjectDir)/CubeMX/Drivers/STM32F4xx_HAL_Driver/Inc/Legacy;$(ProjectDir)/CubeMX/Mylibs/KEY/inc;$(ProjectDir)/CubeMX/Mylibs/LCD/inc;$(ProjectDir)/CubeMX/Mylibs/TOUCH/inc;$(ProjectDir)/CubeMX/Mylibs/RING_FIFO/inc;$(ProjectDir)/CubeMX/Mylibs/EEPROM/inc;$(ProjectDir)/CubeMX/FATFS/Target;$(ProjectDir)/CubeMX/FATFS/App;$(ProjectDir)/CubeMX/Middlewares/Third_Party/FatFs/src"
       debug_register_definition_file="$(ProjectDir)/STM32F407_Registers.xml"
       debug_stack_pointer_start="__stack_end__"
       debug_start_from_entry_point_symbol="Yes"
@@ -62,8 +62,6 @@
     <configuration
       Name="Debug"
       WARNING_LEVEL="2 (Standard)"
-      arm_linker_process_stack_size="8192"
-      arm_linker_stack_size="8192"
       c_preprocessor_definitions=""
       gcc_strict_prototypes_warning="None"
       gcc_uninitialized_variables_warning="Yes"
@@ -85,6 +83,23 @@
           default_const_section=".init_rodata" />
       </file>
     </folder>
+    <folder Name="Core">
+      <configuration Name="Common" filter="c;cpp;cxx;cc;h;s;asm;inc" />
+      <file file_name="CubeMX/Core/Src/adc.c" />
+      <file file_name="CubeMX/Core/Src/dev.c" />
+      <file file_name="CubeMX/Core/Src/dma.c" />
+      <file file_name="CubeMX/Core/Src/events.c" />
+      <file file_name="CubeMX/Core/Src/fsmc.c" />
+      <file file_name="CubeMX/Core/Src/gpio.c" />
+      <file file_name="CubeMX/Core/Src/main.c" />
+      <file file_name="CubeMX/Core/Src/rtc.c" />
+      <file file_name="CubeMX/Core/Src/sdio.c" />
+      <file file_name="CubeMX/Core/Src/spi.c" />
+      <file file_name="CubeMX/Core/Src/stm32f4xx_hal_msp.c" />
+      <file file_name="CubeMX/Core/Src/stm32f4xx_it.c" />
+      <file file_name="CubeMX/Core/Src/tim.c" />
+      <file file_name="CubeMX/Core/Src/usart.c" />
+    </folder>
     <folder Name="Drivers">
       <file file_name="CubeMX/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal.c" />
       <file file_name="CubeMX/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_cortex.c" />
@@ -99,6 +114,7 @@
       <file file_name="CubeMX/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_pwr_ex.c" />
       <file file_name="CubeMX/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_rcc.c" />
       <file file_name="CubeMX/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_rcc_ex.c" />
+      <file file_name="CubeMX/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_sd.c" />
       <file file_name="CubeMX/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_sram.c" />
       <file file_name="CubeMX/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim.c" />
       <file file_name="CubeMX/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_hal_tim_ex.c" />
@@ -109,10 +125,32 @@
       <file file_name="CubeMX/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_ll_gpio.c" />
       <file file_name="CubeMX/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_ll_rcc.c" />
       <file file_name="CubeMX/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_ll_rtc.c" />
+      <file file_name="CubeMX/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_ll_sdmmc.c" />
       <file file_name="CubeMX/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_ll_spi.c" />
       <file file_name="CubeMX/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_ll_tim.c" />
       <file file_name="CubeMX/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_ll_usart.c" />
       <file file_name="CubeMX/Drivers/STM32F4xx_HAL_Driver/Src/stm32f4xx_ll_utils.c" />
+    </folder>
+    <folder Name="FatFs">
+      <folder Name="App">
+        <file file_name="CubeMX/FATFS/App/fatfs.c" />
+      </folder>
+      <folder Name="Target">
+        <file file_name="CubeMX/FATFS/Target/bsp_driver_sd.c" />
+        <file file_name="CubeMX/FATFS/Target/fatfs_platform.c" />
+        <file file_name="CubeMX/FATFS/Target/sd_diskio.c" />
+      </folder>
+    </folder>
+    <folder Name="Middlewares">
+      <folder Name="FatFs">
+        <folder Name="option">
+          <file file_name="CubeMX/Middlewares/Third_Party/FatFs/src/option/cc936.c" />
+          <file file_name="CubeMX/Middlewares/Third_Party/FatFs/src/option/syscall.c" />
+        </folder>
+        <file file_name="CubeMX/Middlewares/Third_Party/FatFs/src/diskio.c" />
+        <file file_name="CubeMX/Middlewares/Third_Party/FatFs/src/ff.c" />
+        <file file_name="CubeMX/Middlewares/Third_Party/FatFs/src/ff_gen_drv.c" />
+      </folder>
     </folder>
     <folder Name="Mylibs">
       <file file_name="CubeMX/Mylibs/LCD/src/ILI93xx.c" />
@@ -125,22 +163,6 @@
       <file file_name="STM32F4xx/Scripts/STM32F4xx_Target.js">
         <configuration Name="Common" file_type="Reset Script" />
       </file>
-    </folder>
-    <folder Name="Source Files">
-      <configuration Name="Common" filter="c;cpp;cxx;cc;h;s;asm;inc" />
-      <file file_name="CubeMX/Core/Src/adc.c" />
-      <file file_name="CubeMX/Core/Src/dev.c" />
-      <file file_name="CubeMX/Core/Src/dma.c" />
-      <file file_name="CubeMX/Core/Src/events.c" />
-      <file file_name="CubeMX/Core/Src/fsmc.c" />
-      <file file_name="CubeMX/Core/Src/gpio.c" />
-      <file file_name="CubeMX/Core/Src/main.c" />
-      <file file_name="CubeMX/Core/Src/rtc.c" />
-      <file file_name="CubeMX/Core/Src/spi.c" />
-      <file file_name="CubeMX/Core/Src/stm32f4xx_hal_msp.c" />
-      <file file_name="CubeMX/Core/Src/stm32f4xx_it.c" />
-      <file file_name="CubeMX/Core/Src/tim.c" />
-      <file file_name="CubeMX/Core/Src/usart.c" />
     </folder>
     <folder Name="System Files">
       <file file_name="SEGGER_THUMB_Startup.s" />

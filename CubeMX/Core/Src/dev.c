@@ -42,8 +42,8 @@ void uart6_config(void) {
   LL_DMA_SetDataLength(DMA2, LL_DMA_STREAM_1, UART6_DMARX_BUF_SIZE);
 
   /* USART6_TX DMA */
-  LL_DMA_SetChannelSelection(DMA2, LL_DMA_STREAM_6, LL_DMA_CHANNEL_5);
-  LL_DMA_ConfigTransfer(DMA2, LL_DMA_STREAM_6,
+  LL_DMA_SetChannelSelection(DMA2, LL_DMA_STREAM_7, LL_DMA_CHANNEL_5);
+  LL_DMA_ConfigTransfer(DMA2, LL_DMA_STREAM_7,
       LL_DMA_DIRECTION_MEMORY_TO_PERIPH |
           LL_DMA_PRIORITY_HIGH |
           LL_DMA_MODE_NORMAL |
@@ -51,22 +51,22 @@ void uart6_config(void) {
           LL_DMA_MEMORY_INCREMENT |
           LL_DMA_PDATAALIGN_BYTE |
           LL_DMA_MDATAALIGN_BYTE);
-  LL_DMA_ConfigAddresses(DMA2, LL_DMA_STREAM_6,
+  LL_DMA_ConfigAddresses(DMA2, LL_DMA_STREAM_7,
       (uint32_t)uart6_dmatx_buf,
       LL_USART_DMA_GetRegAddr(USART6),
-      LL_DMA_GetDataTransferDirection(DMA2, LL_DMA_STREAM_6));
+      LL_DMA_GetDataTransferDirection(DMA2, LL_DMA_STREAM_7));
 
   LL_DMA_ClearFlag_DME1(DMA2);
-  LL_DMA_ClearFlag_DME6(DMA2);
+  LL_DMA_ClearFlag_DME7(DMA2);
   LL_DMA_ClearFlag_HT1(DMA2);
   LL_DMA_ClearFlag_TC1(DMA2);
-  LL_DMA_ClearFlag_TC6(DMA2);
+  LL_DMA_ClearFlag_TC7(DMA2);
   LL_DMA_ClearFlag_TE1(DMA2);
-  LL_DMA_ClearFlag_TE6(DMA2);
+  LL_DMA_ClearFlag_TE7(DMA2);
 
   LL_DMA_EnableIT_HT(DMA2, LL_DMA_STREAM_1);
   LL_DMA_EnableIT_TC(DMA2, LL_DMA_STREAM_1);
-  LL_DMA_EnableIT_TC(DMA2, LL_DMA_STREAM_6);
+  LL_DMA_EnableIT_TC(DMA2, LL_DMA_STREAM_7);
 
   LL_USART_EnableDMAReq_RX(USART6);
   LL_USART_EnableDMAReq_TX(USART6);
@@ -140,9 +140,9 @@ void uart6_tx_poll(void) {
   uart6_dev.status = 1;
   uart6_dev.tx_count += size;
 
-  LL_DMA_DisableStream(DMA2, LL_DMA_STREAM_6);
-  LL_DMA_SetDataLength(DMA2, LL_DMA_STREAM_6, size);
-  LL_DMA_EnableStream(DMA2, LL_DMA_STREAM_6);
+  LL_DMA_DisableStream(DMA2, LL_DMA_STREAM_7);
+  LL_DMA_SetDataLength(DMA2, LL_DMA_STREAM_7, size);
+  LL_DMA_EnableStream(DMA2, LL_DMA_STREAM_7);
 }
 
 uint16_t uart6_read(uint8_t *buf, uint16_t size) {

@@ -20,7 +20,9 @@
 #include "main.h"
 #include "adc.h"
 #include "dma.h"
+#include "fatfs.h"
 #include "rtc.h"
+#include "sdio.h"
 #include "spi.h"
 #include "tim.h"
 #include "usart.h"
@@ -114,6 +116,8 @@ int main(void)
   MX_ADC1_Init();
   MX_RTC_Init();
   MX_USART6_UART_Init();
+  MX_SDIO_SD_Init();
+  MX_FATFS_Init();
   /* USER CODE BEGIN 2 */
   LL_GPIO_SetOutputPin(LED0_GPIO_Port, LED0_Pin);
   LL_GPIO_ResetOutputPin(LED1_GPIO_Port, LED1_Pin);
@@ -127,6 +131,7 @@ int main(void)
   BACK_COLOR = WHITE;
   LCD_ShowString(50, 7, 50 * 6, 12, 12, (uint8_t *)"hello world");
 
+  Fatfs_RW_test();
   /* USER CODE END 2 */
 
   /* Infinite loop */
