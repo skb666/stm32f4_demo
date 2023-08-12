@@ -21,7 +21,7 @@
 #include "sdio.h"
 
 /* USER CODE BEGIN 0 */
-
+#include "bsp_driver_sd.h"
 /* USER CODE END 0 */
 
 SD_HandleTypeDef hsd;
@@ -49,6 +49,7 @@ void MX_SDIO_SD_Init(void)
   hsd.Init.ClockDiv = 0;
   /* USER CODE BEGIN SDIO_Init 2 */
   hsd.Init.BusWide = SDIO_BUS_WIDE_1B;
+  BSP_SD_Init();
   /* USER CODE END SDIO_Init 2 */
 
 }

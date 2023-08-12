@@ -61,6 +61,8 @@
 float temperate;
 LL_RTC_DateTypeDef curData;
 LL_RTC_TimeTypeDef curTime;
+uint8_t _CCM_DATA buf[512];
+uint16_t _CCM_DATA size;
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -132,16 +134,13 @@ int main(void)
   POINT_COLOR = BLACK;
   BACK_COLOR = WHITE;
   LCD_ShowString(50, 7, 50 * 6, 12, 12, (uint8_t *)"hello world");
-
-  Fatfs_RW_test();
   /* USER CODE END 2 */
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
   while (1)
   {
-    uint8_t buf[256];
-    uint16_t size = uart6_read(buf, sizeof(buf));
+    size = uart6_read(buf, sizeof(buf));
     if (size) {
       uart6_write(buf, size);
     }

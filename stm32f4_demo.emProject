@@ -24,7 +24,7 @@
       arm_endian="Little"
       arm_fp_abi="Hard"
       arm_fpu_type="FPv4-SP-D16"
-      arm_linker_heap_size="0"
+      arm_linker_heap_size="1024"
       arm_linker_stack_size="16384"
       arm_linker_variant="SEGGER"
       arm_rtl_variant="SEGGER"
@@ -56,7 +56,7 @@
       macros="DeviceHeaderFile=$(PackagesDir)/STM32F4xx/Device/Include/stm32f4xx.h;DeviceSystemFile=$(PackagesDir)/STM32F4xx/Device/Source/system_stm32f4xx.c;DeviceVectorsFile=$(PackagesDir)/STM32F4xx/Source/stm32f407xx_Vectors.s;DeviceFamily=STM32F4xx;DeviceSubFamily=STM32F407;Target=STM32F407ZGTx"
       project_directory=""
       project_type="Executable"
-      speed="7500"
+      speed="50000"
       target_reset_script="Reset();"
       target_trace_initialize_script="EnableTrace(&quot;$(TraceInterfaceType)&quot;)" />
     <configuration
@@ -139,14 +139,14 @@
         <folder Name="App">
           <file file_name="CubeMX/FATFS/App/fatfs.c" />
         </folder>
-        <folder Name="option">
-          <file file_name="CubeMX/Middlewares/Third_Party/FatFs/src/option/cc936.c" />
-          <file file_name="CubeMX/Middlewares/Third_Party/FatFs/src/option/syscall.c" />
-        </folder>
         <folder Name="Target">
           <file file_name="CubeMX/FATFS/Target/bsp_driver_sd.c" />
           <file file_name="CubeMX/FATFS/Target/fatfs_platform.c" />
           <file file_name="CubeMX/FATFS/Target/sd_diskio.c" />
+        </folder>
+        <folder Name="option">
+          <file file_name="CubeMX/Middlewares/Third_Party/FatFs/src/option/cc936.c" />
+          <file file_name="CubeMX/Middlewares/Third_Party/FatFs/src/option/syscall.c" />
         </folder>
         <file file_name="CubeMX/Middlewares/Third_Party/FatFs/src/diskio.c" />
         <file file_name="CubeMX/Middlewares/Third_Party/FatFs/src/ff.c" />
@@ -176,10 +176,10 @@
     </folder>
     <folder Name="Mylibs">
       <file file_name="CubeMX/Mylibs/LCD/src/ILI93xx.c" />
+      <file file_name="CubeMX/Mylibs/TOUCH/src/XPT2046.c" />
       <file file_name="CubeMX/Mylibs/KEY/src/key.c" />
       <file file_name="CubeMX/Mylibs/RING_FIFO/src/ring_fifo.c" />
       <file file_name="CubeMX/Mylibs/EEPROM/src/w25qxx.c" />
-      <file file_name="CubeMX/Mylibs/TOUCH/src/XPT2046.c" />
     </folder>
     <folder Name="Script Files">
       <file file_name="STM32F4xx/Scripts/STM32F4xx_Target.js">
@@ -188,10 +188,10 @@
     </folder>
     <folder Name="System Files">
       <file file_name="SEGGER_THUMB_Startup.s" />
+      <file file_name="STM32F4xx/Source/STM32F4xx_Startup.s" />
       <file file_name="STM32F4xx/Source/stm32f407xx_Vectors.s">
         <configuration Name="Common" file_type="Assembly" />
       </file>
-      <file file_name="STM32F4xx/Source/STM32F4xx_Startup.s" />
     </folder>
   </project>
 </solution>

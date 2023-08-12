@@ -22,7 +22,6 @@
 #include "usbd_storage_if.h"
 
 /* USER CODE BEGIN INCLUDE */
-#include "sdio.h"
 #include "ff_gen_drv.h"
 #include "sd_diskio.h"
 /* USER CODE END INCLUDE */
@@ -179,7 +178,9 @@ USBD_StorageTypeDef USBD_Storage_Interface_fops_FS =
 int8_t STORAGE_Init_FS(uint8_t lun)
 {
   /* USER CODE BEGIN 2 */
-  return SD_Driver.disk_initialize(lun);
+  UNUSED(lun);
+
+  return (USBD_OK);
   /* USER CODE END 2 */
 }
 
@@ -193,11 +194,17 @@ int8_t STORAGE_Init_FS(uint8_t lun)
 int8_t STORAGE_GetCapacity_FS(uint8_t lun, uint32_t *block_num, uint16_t *block_size)
 {
   /* USER CODE BEGIN 3 */
-  UNUSED(lun);
+  HAL_SD_CardInfoTypeDef info;
+  int8_t ret = USBD_FAIL;
 
-  *block_num  = hsd.SdCard.LogBlockNbr - 1;
-  *block_size = hsd.SdCard.LogBlockSize;
-  return (USBD_OK);
+  if(BSP_SD_IsDetected() != SD_NOT_PRESENT) {
+    BSP_SD_GetCardInfo(&info);
+
+    *block_num =  info.LogBlockNbr - 1;
+    *block_size = info.LogBlockSize;
+    ret = USBD_OK;
+  }
+  return ret;
   /* USER CODE END 3 */
 }
 
@@ -209,7 +216,9 @@ int8_t STORAGE_GetCapacity_FS(uint8_t lun, uint32_t *block_num, uint16_t *block_
 int8_t STORAGE_IsReady_FS(uint8_t lun)
 {
   /* USER CODE BEGIN 4 */
-  return SD_Driver.disk_status(lun);
+  UNUSED(lun);
+
+  return (USBD_OK);
   /* USER CODE END 4 */
 }
 
@@ -238,7 +247,16 @@ int8_t STORAGE_IsWriteProtected_FS(uint8_t lun)
 int8_t STORAGE_Read_FS(uint8_t lun, uint8_t *buf, uint32_t blk_addr, uint16_t blk_len)
 {
   /* USER CODE BEGIN 6 */
-  return SD_Driver.disk_read(lun, buf, blk_addr, blk_len);
+  int8_t ret = USBD_FAIL;
+
+  if(BSP_SD_IsDetected() != SD_NOT_PRESENT) {
+    BSP_SD_ReadBlocks_DMA((uint32_t *)buf, blk_addr, blk_len);
+
+    /* Wait until SD card is ready to use for new operation */
+    while (BSP_SD_GetCardState() != SD_TRANSFER_OK);
+    ret = USBD_OK;
+  }
+  return ret;
   /* USER CODE END 6 */
 }
 
@@ -253,7 +271,16 @@ int8_t STORAGE_Read_FS(uint8_t lun, uint8_t *buf, uint32_t blk_addr, uint16_t bl
 int8_t STORAGE_Write_FS(uint8_t lun, uint8_t *buf, uint32_t blk_addr, uint16_t blk_len)
 {
   /* USER CODE BEGIN 7 */
-  return SD_Driver.disk_write(lun, buf, blk_addr, blk_len);
+  int8_t ret = USBD_FAIL;
+
+  if(BSP_SD_IsDetected() != SD_NOT_PRESENT) {
+    BSP_SD_WriteBlocks_DMA((uint32_t *)buf, blk_addr, blk_len);
+
+    /* Wait until SD card is ready to use for new operation */
+    while (BSP_SD_GetCardState() != SD_TRANSFER_OK);
+    ret = USBD_OK;
+  }
+  return ret;
   /* USER CODE END 7 */
 }
 
