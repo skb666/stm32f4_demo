@@ -92,6 +92,7 @@
       <file file_name="CubeMX/Core/Src/fsmc.c" />
       <file file_name="CubeMX/Core/Src/gpio.c" />
       <file file_name="CubeMX/Core/Src/main.c" />
+      <file file_name="CubeMX/Core/Src/onchip_flash.c" />
       <file file_name="CubeMX/Core/Src/rtc.c" />
       <file file_name="CubeMX/Core/Src/sdio.c" />
       <file file_name="CubeMX/Core/Src/spi.c" />
